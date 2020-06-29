@@ -15,7 +15,8 @@ namespace SvgRenderer
         public static void Test(string fontDirectory, string outputDirectory)
         {
             char[] textBuffer = "Hello World".ToCharArray();
-
+            // textBuffer = "H".ToCharArray();
+            
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
             using (SvgGraphics g = new SvgGraphics(sb))
@@ -89,7 +90,9 @@ namespace SvgRenderer
 
                 //transform back
                 g.ScaleTransform(1.0F, -1.0F);// Flip the Y-Axis 
-                g.TranslateTransform(0.0F, -(float)500);// Translate the drawing area accordingly            
+                g.TranslateTransform(0.0F, -(float)500);// Translate the drawing area accordingly 
+                
+                g.WriteEndFile();
             } // End Using g 
             
             

@@ -32,7 +32,7 @@ namespace SvgRenderer
             
             System.Console.WriteLine(System.Environment.NewLine);
             System.Console.WriteLine(" --- Press any key to continue --- ");
-            System.Console.ReadKey();
+            // System.Console.ReadKey();
         }
 
 
