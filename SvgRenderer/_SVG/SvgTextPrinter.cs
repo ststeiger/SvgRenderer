@@ -19,9 +19,9 @@ namespace SvgRenderer
         GlyphOutlineBuilder _currentGlyphPathBuilder;
         GlyphTranslatorToSvgPath _txToGdiPath;
         GlyphLayout _glyphLayout = new GlyphLayout();
-        SolidBrush _fillBrush = new SolidBrush(Color.Black);
-        Pen _outlinePen = new Pen(Color.Green);
-        //
+        SvgSolidBrush _fillBrush = new SvgSolidBrush(SvgColor.Black);
+        SvgPen _outlinePen = new SvgPen(SvgColor.Green);
+        
         //for optimization
         GlyphMeshCollection<SvgPath> _glyphMeshCollections = new GlyphMeshCollection<SvgPath>();
 
@@ -29,15 +29,15 @@ namespace SvgRenderer
 
 
         public bool EnableColorGlyph { get; set; } = true;
-        public Color FillColor { get; set; }
-        public Color OutlineColor { get; set; }
+        public string FillColor { get; set; }
+        public string OutlineColor { get; set; }
 
 
         public SvgTextPrinter()
         {
             FillBackground = true;
-            FillColor = Color.Black;
-            OutlineColor = Color.Green;
+            FillColor = SvgColor.Black;
+            OutlineColor = SvgColor.Green;
         }
 
 
@@ -197,7 +197,8 @@ namespace SvgRenderer
 
                         g.TranslateTransform(cx, cy);
 
-                        _fillBrush.Color = Color.FromArgb(red, green, blue);//***
+                        _fillBrush.Color = SvgColor.FromArgb(red, green, blue);
+                        
                         if (FillBackground)
                         {
                             g.FillPath(_fillBrush, path);

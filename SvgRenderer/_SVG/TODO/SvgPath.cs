@@ -23,7 +23,7 @@ namespace SvgRenderer
         
         protected void AppendToPath(string textToAppend)
         {
-            if (this.sb.Length == 0)
+            if (this.sb.Length != 0)
                 this.sb.Append(" ");
             
             this.sb.Append(textToAppend);

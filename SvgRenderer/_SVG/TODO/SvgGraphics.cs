@@ -31,7 +31,8 @@ namespace SvgRenderer
             // width="1000" height="1187.198"
             
             this.m_stringBuilder.AppendLine("<!--");
-            this.m_stringBuilder.AppendFormat("Clear: R: {0}, G: {1}, B: {2}", color.R, color.G, color.B);
+            this.m_stringBuilder.AppendFormat("    Clear: R: {0}, G: {1}, B: {2}", color.R, color.G, color.B);
+            this.m_stringBuilder.AppendLine();
             this.m_stringBuilder.AppendLine("-->");
             this.m_stringBuilder.AppendLine();
         }
@@ -41,16 +42,18 @@ namespace SvgRenderer
             this.m_stringBuilder.AppendLine("</svg>");
         }
 
+
+        protected string m_scale;
+        
         // Applies the specified scaling operation to the transformation matrix of this
         // System.Drawing.Graphics by prepending it to the object's transformation matrix.
         //   sx: Scale factor in the x direction.
         //   sy: Scale factor in the y direction.
         public void ScaleTransform(float sx, float sy)
         {
-            this.m_stringBuilder.AppendLine("<!--");
-            this.m_stringBuilder.AppendFormat("ScaleTransform: dx: {0}, dy: {1}", sx, sy);
-            this.m_stringBuilder.AppendLine("-->");
-            this.m_stringBuilder.AppendLine();
+            this.m_scale = "scale(" + sx.ToString(System.Globalization.CultureInfo.InvariantCulture) 
+                                        + " " + sy.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                                        + ")";
         }
 
 
@@ -80,16 +83,27 @@ namespace SvgRenderer
         //   brush: System.Drawing.Brush that determines the characteristics of the fill.
         //   path: System.Drawing.Drawing2D.GraphicsPath that represents the path to fill.
         // Ausnahmen: T:System.ArgumentNullException: brush is null. -or- path is null.
-        public void FillPath(System.Drawing.Brush brush, SvgPath path)
+        public void FillPath(SvgSolidBrush brush, SvgPath path)
         {
             this.m_stringBuilder.Append("<path d=\"");
             this.m_stringBuilder.Append(path.sb);
-            this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:0.26px;\"");
-
-            if (this.m_translate != null)
+            // stroke-width:0.26px
+            this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:5px;\"");
+            
+            if (this.m_scale != null || this.m_translate != null)
             {
                 this.m_stringBuilder.Append(" transform=\"");
-                this.m_stringBuilder.Append(this.m_translate);
+                
+                if(this.m_translate != null)
+                {
+                    this.m_stringBuilder.Append(this.m_translate);
+                    if (this.m_scale != null)
+                        this.m_stringBuilder.Append(" ");
+                }
+                
+                if(this.m_scale != null)
+                    this.m_stringBuilder.Append(this.m_scale);
+                
                 this.m_stringBuilder.Append("\"");
             }
             
@@ -110,7 +124,7 @@ namespace SvgRenderer
         //   pen: System.Drawing.Pen that determines the color, width, and style of the path.
         //   path: System.Drawing.Drawing2D.GraphicsPath to draw.
         // Ausnahmen: T:System.ArgumentNullException: pen is null. -or- path is null.
-        public void DrawPath(System.Drawing.Pen pen, SvgPath path)
+        public void DrawPath(SvgPen pen, SvgPath path)
         {
             this.m_stringBuilder.AppendLine("<!--");
             this.m_stringBuilder.AppendLine("DrawPath: ");
