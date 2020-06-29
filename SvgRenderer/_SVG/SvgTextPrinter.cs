@@ -156,6 +156,7 @@ namespace SvgRenderer
             float baseline = y;
             var snapToPxScale = new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
 
+            g.OpenGroup();
 
             COLR colrTable = typeface.COLRTable;
             CPAL cpalTable = typeface.CPALTable;
@@ -243,6 +244,8 @@ namespace SvgRenderer
                     g.TranslateTransform(-cx, -cy);
                 } // End else
             } // Whend 
+
+            g.CloseGroup();
 
         } // End Sub 
 

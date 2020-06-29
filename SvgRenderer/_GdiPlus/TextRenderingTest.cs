@@ -14,9 +14,9 @@ namespace SvgRenderer
     class GdiTextRenderingTest
     {
 
-        public static void Test(string fontDirectory, string outputDirectory)
+        public static void Test(string textToPrint, string fontDirectory, string outputDirectory)
         {
-            char[] textBuffer = "Hello World".ToCharArray();
+            char[] textBuffer = textToPrint.ToCharArray();
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(1000, 1000);
             using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp))
             {

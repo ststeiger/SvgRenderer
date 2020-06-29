@@ -30,9 +30,15 @@ namespace SvgRenderer
                 fontDirectory = @"D:\username\Documents\Visual Studio 2017\Projects\Typography\Demo\Windows\TestFonts";
             }
 
-            
-            GdiTextRenderingTest.Test(fontDirectory, outputDirectory);
-            SvgRenderingTest.Test(fontDirectory, outputDirectory);
+
+            string textToPrint = "Hello World";
+            textToPrint = "A";
+            char[] textBuffer = "Hello World".ToCharArray();
+            textBuffer = "A".ToCharArray();
+
+
+            GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
+            SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);
             
             

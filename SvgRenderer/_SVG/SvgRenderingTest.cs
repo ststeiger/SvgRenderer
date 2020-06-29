@@ -12,11 +12,10 @@ namespace SvgRenderer
     class SvgRenderingTest
     {
 
-        public static void Test(string fontDirectory, string outputDirectory)
+        public static void Test(string textToPrint, string fontDirectory, string outputDirectory)
         {
-            char[] textBuffer = "Hello World".ToCharArray();
-            // textBuffer = "H".ToCharArray();
-            
+            char[] textBuffer = textToPrint.ToCharArray();
+
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
             using (SvgGraphics g = new SvgGraphics(sb))
@@ -70,11 +69,12 @@ namespace SvgRenderer
                 _currentTextPrinter.TargetGraphics = g;
                 //render at specific pos
                 int lineSpacingPx = (int)System.Math.Ceiling(_currentTextPrinter.FontLineSpacingPx);
-                float x_pos = 0, y_pos = y_pos = lineSpacingPx * 2; //start 1st line
+                 float x_pos = 0, y_pos = y_pos = lineSpacingPx * 2; //start 1st line
 
 
                 // test draw multiple lines
 
+                /*
                 for (int i = 0; i < 3; ++i)
                 {
                     _currentTextPrinter.DrawString(
@@ -87,6 +87,20 @@ namespace SvgRenderer
                     //draw top to bottom 
                     y_pos -= lineSpacingPx;
                 }
+                */
+
+                {
+                    _currentTextPrinter.DrawString(
+                         textBuffer,
+                         0,
+                         textBuffer.Length,
+                         x_pos,
+                         y_pos
+                        );
+                    //draw top to bottom 
+                    y_pos -= lineSpacingPx;
+                }
+
 
                 //transform back
                 g.ScaleTransform(1.0F, -1.0F);// Flip the Y-Axis 
