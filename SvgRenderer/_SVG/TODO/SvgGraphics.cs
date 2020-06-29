@@ -88,7 +88,7 @@ namespace SvgRenderer
             this.m_stringBuilder.Append("<path d=\"");
             this.m_stringBuilder.Append(path.sb);
             // stroke-width:0.26px
-            this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:5px;\"");
+            this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:1px;\"");
             
             if (this.m_scale != null || this.m_translate != null)
             {

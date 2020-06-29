@@ -24,6 +24,12 @@ namespace SvgRenderer
             {
                 fontDirectory = "/usr/share/fonts/truetype/ubuntu/";
             }
+
+            if ("COR".Equals(System.Environment.UserDomainName, System.StringComparison.InvariantCultureIgnoreCase))
+            {
+                fontDirectory = @"D:\username\Documents\Visual Studio 2017\Projects\Typography\Demo\Windows\TestFonts";
+            }
+
             
             GdiTextRenderingTest.Test(fontDirectory, outputDirectory);
             SvgRenderingTest.Test(fontDirectory, outputDirectory);

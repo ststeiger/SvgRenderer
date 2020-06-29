@@ -32,7 +32,8 @@ namespace SvgRenderer
         
         public void CloseFigure()
         {
-            this.AppendToPath("Z");
+            if (this.sb.Length != 0)
+                this.AppendToPath("Z");
         }
         
         
