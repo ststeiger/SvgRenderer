@@ -36,9 +36,9 @@ namespace SvgRenderer
             textToPrint = "A";
             textToPrint = "HELLO";
             textToPrint = "HELiOS";
-            textToPrint = "hello";
-            
-            
+            // textToPrint = "hello";
+            // textToPrint = "Halloween";
+
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);

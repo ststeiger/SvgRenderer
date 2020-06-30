@@ -198,7 +198,7 @@ namespace SvgRenderer
 
                         g.TranslateTransform(cx, cy);
 
-                        _fillBrush.Color = SvgColor.FromArgb(red, green, blue);
+                        _fillBrush.Color = SvgColor.ToWebRgb(red, green, blue);
                         
                         if (FillBackground)
                         {
