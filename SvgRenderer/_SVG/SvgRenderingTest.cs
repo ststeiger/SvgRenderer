@@ -22,8 +22,8 @@ namespace SvgRenderer
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.Clear(System.Drawing.Color.White);
-                g.ScaleTransform(1.0F, -1.0F);// Flip the Y-Axis 
-                g.TranslateTransform(0.0F, -(float)500);// Translate the drawing area accordingly   
+                g.ScaleTransform(1.0F, -1.0F); // Flip the Y-Axis 
+                g.TranslateTransform(0.0F, -(float) 500); // Translate the drawing area accordingly   
 
 
                 //1. create font collection             
@@ -34,20 +34,17 @@ namespace SvgRenderer
 
                 _installedFontCollection.LoadFontsFromFolder(fontDirectory);
                 //installedFontCollection.LoadSystemFonts();
-
-
+                
                 InstalledTypeface ff = null;
-
+                
                 foreach (InstalledTypeface thisTypeface in _installedFontCollection.GetInstalledFontIter())
                 {
                     System.Console.WriteLine(thisTypeface.FontName);
                     ff = thisTypeface;
                     break;
                 }
-
-
-
-
+                
+                
                 TypefaceStore _typefaceStore = new TypefaceStore();
                 _typefaceStore.FontCollection = _installedFontCollection;
                 _installedFontCollection.UpdateUnicodeRanges();
@@ -68,8 +65,8 @@ namespace SvgRenderer
                 _currentTextPrinter.PositionTechnique = PositionTechnique.None;
                 _currentTextPrinter.TargetGraphics = g;
                 //render at specific pos
-                int lineSpacingPx = (int)System.Math.Ceiling(_currentTextPrinter.FontLineSpacingPx);
-                 float x_pos = 0, y_pos = y_pos = lineSpacingPx * 2; //start 1st line
+                int lineSpacingPx = (int) System.Math.Ceiling(_currentTextPrinter.FontLineSpacingPx);
+                float x_pos = 0, y_pos = y_pos = lineSpacingPx * 2; //start 1st line
 
 
                 // test draw multiple lines
@@ -91,31 +88,30 @@ namespace SvgRenderer
 
                 {
                     _currentTextPrinter.DrawString(
-                         textBuffer,
-                         0,
-                         textBuffer.Length,
-                         x_pos,
-                         y_pos
-                        );
+                        textBuffer,
+                        0,
+                        textBuffer.Length,
+                        x_pos,
+                        y_pos
+                    );
                     //draw top to bottom 
                     y_pos -= lineSpacingPx;
                 }
-
-
+                
                 //transform back
-                g.ScaleTransform(1.0F, -1.0F);// Flip the Y-Axis 
-                g.TranslateTransform(0.0F, -(float)500);// Translate the drawing area accordingly 
+                g.ScaleTransform(1.0F, -1.0F); // Flip the Y-Axis 
+                g.TranslateTransform(0.0F, -(float) 500); // Translate the drawing area accordingly 
                 
                 g.WriteEndFile();
             } // End Using g 
             
-            
             string svg = sb.ToString();
             outputDirectory = System.IO.Path.Combine(outputDirectory, "FontRendering.svg");
             System.IO.File.WriteAllText(outputDirectory, svg, System.Text.Encoding.UTF8);
-        } // End Sub Test
-
-
-
-    }
-}
+        } // End Sub Test 
+        
+        
+    } // End Class SvgRenderingTest 
+    
+    
+} // End Namespace SvgRenderer 

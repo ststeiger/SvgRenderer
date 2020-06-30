@@ -32,11 +32,13 @@ namespace SvgRenderer
 
 
             string textToPrint = "Hello World";
+            textToPrint = "H";
             textToPrint = "A";
-            char[] textBuffer = "Hello World".ToCharArray();
-            textBuffer = "A".ToCharArray();
-
-
+            textToPrint = "HELLO";
+            textToPrint = "HELiOS";
+            textToPrint = "hello";
+            
+            
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);

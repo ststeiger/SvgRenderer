@@ -1,8 +1,8 @@
 ﻿
 namespace SvgRenderer
 {
-
-
+    
+    
     public class SvgGraphics
         : System.IDisposable
     {
@@ -77,8 +77,8 @@ namespace SvgRenderer
         {
             this.m_stringBuilder.Append("</g>");
         }
-
-
+        
+        
         protected string m_translate;
 
 
@@ -104,7 +104,8 @@ namespace SvgRenderer
             this.m_stringBuilder.Append(path.sb);
             // stroke-width:0.26px
             this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:1px;\"");
-
+            // this.m_stringBuilder.Append("\" style=\"fill: black;stroke: none;\"");
+            
             if (this.m_scale != null || this.m_translate != null)
             {
                 this.m_stringBuilder.Append(" transform=\"");
