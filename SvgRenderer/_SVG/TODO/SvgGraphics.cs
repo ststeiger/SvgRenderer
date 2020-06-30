@@ -1,13 +1,18 @@
 ﻿
 namespace SvgRenderer
 {
-    
-    
+
+
     public class SvgGraphics
         : System.IDisposable
     {
 
         protected System.Text.StringBuilder m_stringBuilder;
+
+        public SmoothingMode SmoothingMode
+        {
+            get; set;
+        }
 
 
         public SvgGraphics()
@@ -47,26 +52,6 @@ namespace SvgRenderer
         } // End Sub WriteEndFile 
 
 
-        protected string m_scale;
-
-        // Applies the specified scaling operation to the transformation matrix of this
-        // System.Drawing.Graphics by prepending it to the object's transformation matrix.
-        //   sx: Scale factor in the x direction.
-        //   sy: Scale factor in the y direction.
-        public void ScaleTransform(float sx, float sy)
-        {
-            this.m_scale = "scale(" + sx.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                        + " " + sy.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                        + ")";
-        } // End Sub ScaleTransform 
-
-
-        public SmoothingMode SmoothingMode
-        {
-            get; set;
-        }
-
-
 
         public void OpenGroup()
         {
@@ -77,10 +62,40 @@ namespace SvgRenderer
         {
             this.m_stringBuilder.Append("</g>");
         }
-        
-        
-        protected string m_translate;
 
+
+        protected string m_rotate;
+
+
+
+        // Applies the specified rotation to the transformation matrix of this System.Drawing.Graphics.
+        //   angle: Angle of rotation in degrees.
+        public void RotateTransform(float angle)
+        {
+            // rotate(30 0 0)
+            this.m_translate = "rotate(" + angle.ToString(System.Globalization.CultureInfo.InvariantCulture) + " 0 0)";
+        }
+
+
+
+        protected string m_scale;
+
+        // Applies the specified scaling operation to the transformation matrix of this
+        // System.Drawing.Graphics by prepending it to the object's transformation matrix.
+        //   sx: Scale factor in the x direction.
+        //   sy: Scale factor in the y direction.
+        public void ScaleTransform(float sx, float sy)
+        {
+            // scale(sx sy)
+            this.m_scale = "scale(" + sx.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + " " + sy.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + ")"
+            ;
+        } // End Sub ScaleTransform 
+
+
+
+        protected string m_translate;
 
         // Changes the origin of the coordinate system by prepending the specified translation
         // to the transformation matrix of this System.Drawing.Graphics.
@@ -88,9 +103,11 @@ namespace SvgRenderer
         //   dy: The y-coordinate of the translation.
         public void TranslateTransform(float dx, float dy)
         {
+            // translate(dx dy)
             this.m_translate = "translate(" + dx.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                            + " " + dy.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                                            + ")";
+                + " " + dy.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                + ")"
+            ;
         } // End Sub TranslateTransform 
 
 
@@ -105,7 +122,7 @@ namespace SvgRenderer
             // stroke-width:0.26px
             // this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:1px;\"");
             this.m_stringBuilder.Append("\" style=\"fill: black;stroke: none;\"");
-            
+
             if (this.m_scale != null || this.m_translate != null)
             {
                 this.m_stringBuilder.Append(" transform=\"");
@@ -154,7 +171,13 @@ namespace SvgRenderer
 
         public void Dispose()
         {
-            // throw new NotImplementedException();
+            if (this.m_stringBuilder != null)
+                this.m_stringBuilder.Length = 0;
+
+            this.m_stringBuilder = null;
+            this.m_rotate = null;
+            this.m_scale = null;
+            this.m_translate = null;
         } // End Sub Dispose 
 
 
