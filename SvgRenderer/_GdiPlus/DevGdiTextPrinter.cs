@@ -1,7 +1,5 @@
 ﻿//MIT, 2016-present, WinterDev
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+
 using Typography.OpenFont;
 using Typography.OpenFont.Tables;
 using Typography.TextLayout;
@@ -20,17 +18,17 @@ namespace SampleWinForms
         GlyphOutlineBuilder _currentGlyphPathBuilder;
         GlyphTranslatorToGdiPath _txToGdiPath;
         GlyphLayout _glyphLayout = new GlyphLayout();
-        SolidBrush _fillBrush = new SolidBrush(Color.Black);
-        Pen _outlinePen = new Pen(Color.Green);
+        System.Drawing.SolidBrush _fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        System.Drawing.Pen _outlinePen = new System.Drawing.Pen(System.Drawing.Color.Green);
         //
         //for optimization
-        GlyphMeshCollection<GraphicsPath> _glyphMeshCollections = new GlyphMeshCollection<GraphicsPath>();
+        GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath> _glyphMeshCollections = new GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath>();
 
         public DevGdiTextPrinter()
         {
             FillBackground = true;
-            FillColor = Color.Black;
-            OutlineColor = Color.Green;
+            FillColor = System.Drawing.Color.Black;
+            OutlineColor = System.Drawing.Color.Green;
         }
 
         public override GlyphLayout GlyphLayoutMan => _glyphLayout;
@@ -78,9 +76,9 @@ namespace SampleWinForms
         }
 
         public bool EnableColorGlyph { get; set; } = true;
-        public Color FillColor { get; set; }
-        public Color OutlineColor { get; set; }
-        public Graphics TargetGraphics { get; set; }
+        public System.Drawing.Color FillColor { get; set; }
+        public System.Drawing.Color OutlineColor { get; set; }
+        public System.Drawing.Graphics TargetGraphics { get; set; }
 
         UnscaledGlyphPlanList _reusableUnscaledGlyphPlanList = new UnscaledGlyphPlanList();
         public override void DrawString(char[] textBuffer, int startAt, int len, float x, float y)
@@ -114,9 +112,9 @@ namespace SampleWinForms
             _outlinePen.Color = this.OutlineColor;
         }
 
-        GraphicsPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
+        System.Drawing.Drawing2D.GraphicsPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
         {
-            if (!_glyphMeshCollections.TryGetCacheGlyph(glyphIndex, out GraphicsPath path))
+            if (!_glyphMeshCollections.TryGetCacheGlyph(glyphIndex, out System.Drawing.Drawing2D.GraphicsPath path))
             {
                 _txToGdiPath.Reset(); //clear
 
@@ -147,16 +145,16 @@ namespace SampleWinForms
 
 
             //this draw a single line text span*** 
-            Graphics g = this.TargetGraphics;
+            System.Drawing.Graphics g = this.TargetGraphics;
             float baseline = y;
-            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale = 
+            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale =
                 new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
-            
+
             COLR colrTable = typeface.COLRTable;
             CPAL cpalTable = typeface.CPALTable;
-            
-            
-            
+
+
+
             bool canUseColorGlyph = EnableColorGlyph && colrTable != null && cpalTable != null;
 
             while (snapToPxScale.Read())
@@ -171,7 +169,7 @@ namespace SampleWinForms
                     for (int c = colorLayerStart; c < colorLayerStart + colorLayerCount; ++c)
                     {
 
-                        GraphicsPath path = GetExistingOrCreateGraphicsPath(colrTable.GlyphLayers[c]);
+                        System.Drawing.Drawing2D.GraphicsPath path = GetExistingOrCreateGraphicsPath(colrTable.GlyphLayers[c]);
                         if (path == null)
                         {
                             //???
@@ -183,8 +181,8 @@ namespace SampleWinForms
 
                         //------
                         //then move pen point to the position we want to draw a glyph
-                        float cx = (float)Math.Round(snapToPxScale.ExactX + x);
-                        float cy = (float)Math.Floor(snapToPxScale.ExactY + baseline);
+                        float cx = (float)System.Math.Round(snapToPxScale.ExactX + x);
+                        float cy = (float)System.Math.Floor(snapToPxScale.ExactY + baseline);
 
                         int palette = 0; // FIXME: assume palette 0 for now 
                         cpalTable.GetColor(
@@ -193,7 +191,7 @@ namespace SampleWinForms
 
                         g.TranslateTransform(cx, cy);
 
-                        _fillBrush.Color = Color.FromArgb(red, green, blue);//***
+                        _fillBrush.Color = System.Drawing.Color.FromArgb(red, green, blue);//***
                         if (FillBackground)
                         {
                             g.FillPath(_fillBrush, path);
@@ -208,7 +206,7 @@ namespace SampleWinForms
                 }
                 else
                 {
-                    GraphicsPath path = GetExistingOrCreateGraphicsPath(glyphIndex);
+                    System.Drawing.Drawing2D.GraphicsPath path = GetExistingOrCreateGraphicsPath(glyphIndex);
 
                     if (path == null)
                     {
@@ -221,8 +219,8 @@ namespace SampleWinForms
 
                     //------
                     //then move pen point to the position we want to draw a glyph
-                    float cx = (float)Math.Round(snapToPxScale.ExactX + x);
-                    float cy = (float)Math.Floor(snapToPxScale.ExactY + baseline);
+                    float cx = (float)System.Math.Round(snapToPxScale.ExactX + x);
+                    float cy = (float)System.Math.Floor(snapToPxScale.ExactY + baseline);
 
                     g.TranslateTransform(cx, cy);
 

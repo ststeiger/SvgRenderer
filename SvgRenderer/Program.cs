@@ -15,24 +15,10 @@ namespace SvgRenderer
 
         static void Main(string[] args)
         {
-            string fontDirectory = @"C:\Users\Administrator\Documents\Visual Studio 2019\Projects\Typography\Demo\Windows\TestFonts";
             string outputDirectory = System.IO.Path.GetDirectoryName( typeof(Program).Assembly.Location);
             outputDirectory = System.IO.Path.Combine(outputDirectory, "..", "..", "..");
             outputDirectory = System.IO.Path.GetFullPath(outputDirectory);
-            
-            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
-            {
-                fontDirectory = "/usr/share/fonts/truetype/ubuntu/";
-                
-                // font repository: https://github.com/LayoutFarm/Typography
-                fontDirectory = "/root/github/ststeiger/Typography/Demo/Windows/TestFonts";
-            }
-
-            if ("COR".Equals(System.Environment.UserDomainName, System.StringComparison.InvariantCultureIgnoreCase))
-            {
-                // font repository: https://github.com/LayoutFarm/Typography
-                fontDirectory = @"D:\username\Documents\Visual Studio 2017\Projects\Typography\Demo\Windows\TestFonts";
-            }
+            string fontDirectory = System.IO.Path.Combine(outputDirectory, "TestFonts");
 
 
             string textToPrint = "Hello World";
@@ -51,8 +37,15 @@ namespace SvgRenderer
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);
-            
-            
+
+            System.Console.WriteLine(System.Environment.NewLine);
+            System.Console.WriteLine(System.Environment.NewLine);
+            System.Console.WriteLine("Raster and vector-image created in: ");
+            System.Console.WriteLine(outputDirectory);
+            System.Console.WriteLine("(FontRendering.png, FontRendering.svg)");
+            System.Console.WriteLine(System.Environment.NewLine);
+
+
             System.Console.WriteLine(System.Environment.NewLine);
             System.Console.WriteLine(" --- Press any key to continue --- ");
             // System.Console.ReadKey();

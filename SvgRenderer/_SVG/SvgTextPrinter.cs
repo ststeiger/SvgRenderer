@@ -1,10 +1,8 @@
 ﻿
-using Typography.Contours;
 using Typography.OpenFont;
-using Typography.TextLayout;
 using Typography.OpenFont.Tables;
-
-using System.Drawing;
+using Typography.TextLayout;
+using Typography.Contours;
 
 
 namespace SvgRenderer
@@ -21,7 +19,7 @@ namespace SvgRenderer
         GlyphLayout _glyphLayout = new GlyphLayout();
         SvgSolidBrush _fillBrush = new SvgSolidBrush(SvgColor.Black);
         SvgPen _outlinePen = new SvgPen(SvgColor.Green);
-        
+
         //for optimization
         GlyphMeshCollection<SvgPath> _glyphMeshCollections = new GlyphMeshCollection<SvgPath>();
 
@@ -154,7 +152,8 @@ namespace SvgRenderer
             //this draw a single line text span*** 
             SvgGraphics g = this.TargetGraphics;
             float baseline = y;
-            var snapToPxScale = new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
+            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale = 
+                new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
 
             g.OpenGroup();
 
@@ -199,7 +198,7 @@ namespace SvgRenderer
                         g.TranslateTransform(cx, cy);
 
                         _fillBrush.Color = SvgColor.ToWebRgb(red, green, blue);
-                        
+
                         if (FillBackground)
                         {
                             g.FillPath(_fillBrush, path);

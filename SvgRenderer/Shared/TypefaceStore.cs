@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Typography.OpenFont;
 namespace Typography.FontManagement
 {
-    class TypefaceStore
+    public class TypefaceStore
     {
 
         Dictionary<InstalledTypeface, Typeface> _loadedTypefaces = new Dictionary<InstalledTypeface, Typeface>();
