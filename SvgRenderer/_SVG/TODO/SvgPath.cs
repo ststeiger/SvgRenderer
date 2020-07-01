@@ -64,7 +64,6 @@ namespace SvgRenderer
             }
             else
             {
-                //this.AppendToPath($"C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt4.Y}");
                 // this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}"); // funny 
                 this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt4.Y}");
             }
