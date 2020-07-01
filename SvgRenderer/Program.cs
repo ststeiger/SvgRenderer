@@ -55,14 +55,14 @@ namespace SvgRenderer
 
         static void Main(string[] args)
         {
-            TestGdiFont();
+            // TestGdiFont();
 
             string outputDirectory = System.IO.Path.GetDirectoryName( typeof(Program).Assembly.Location);
             outputDirectory = System.IO.Path.Combine(outputDirectory, "..", "..", "..");
             outputDirectory = System.IO.Path.GetFullPath(outputDirectory);
             string fontDirectory = System.IO.Path.Combine(outputDirectory, "TestFonts");
             // string fontDirectory = System.IO.Path.Combine(outputDirectory, "SystemFonts");
-            Helpers.FontHelper.ListInstalledTypefaces(fontDirectory);
+            // Helpers.FontHelper.ListInstalledTypefaces(fontDirectory);
 
 
             string textToPrint = "Hello World";
@@ -104,13 +104,14 @@ namespace SvgRenderer
             
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
+            PdfTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);
 
             System.Console.WriteLine(System.Environment.NewLine);
             System.Console.WriteLine(System.Environment.NewLine);
             System.Console.WriteLine("Raster and vector-image created in: ");
             System.Console.WriteLine(outputDirectory);
-            System.Console.WriteLine("(FontRendering.png, FontRendering.svg)");
+            System.Console.WriteLine("(FontRendering.png, FontRendering.svg, FontRendering.pdf)");
             System.Console.WriteLine(System.Environment.NewLine);
 
 

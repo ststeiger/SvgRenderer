@@ -1,12 +1,11 @@
-﻿//Apache2, 2017-present, WinterDev
+﻿
+//Apache2, 2017-present, WinterDev
 //Apache2, 2014-2016, Samuel Carlsson, WinterDev
 
-
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using Typography.OpenFont;
 
-namespace SampleWinForms
+
+namespace SvgRenderer
 {
     //------------------
     //this is Gdi+ version ***
@@ -15,27 +14,24 @@ namespace SampleWinForms
     /// <summary>
     /// read result as Gdi+ GraphicsPath
     /// </summary>
-    public class GlyphTranslatorToGdiPath 
+    public class GlyphTranslatorToPdfPath 
         : IGlyphTranslator
     {
         //this gdi+ version
-        GraphicsPath ps;
+        PdfSharpCore.Drawing.XGraphicsPath ps;
         float lastMoveX;
         float lastMoveY;
         float lastX;
         float lastY;
 
         bool contour_is_closed = true;
-        
-        
-        public GlyphTranslatorToGdiPath()
+        public GlyphTranslatorToPdfPath()
         { }
-        
         
         public void BeginRead(int countourCount)
         {
-            ps = new GraphicsPath();
-            ps.Reset();
+            ps = new PdfSharpCore.Drawing.XGraphicsPath();
+            // ps.Reset();
         }
         
         
@@ -53,6 +49,8 @@ namespace SampleWinForms
             lastX = lastMoveX = (float)x0;
             lastY = lastMoveY = (float)y0;
         }
+        
+        
         public void CloseContour()
         {
             contour_is_closed = true;
@@ -61,6 +59,8 @@ namespace SampleWinForms
             lastX = lastMoveX;
             lastY = lastMoveY;
         }
+        
+        
         public void Curve3(float x1, float y1, float x2, float y2)
         {
             //from http://stackoverflow.com/questions/9485788/convert-quadratic-curve-to-cubic-curve
@@ -74,38 +74,42 @@ namespace SampleWinForms
             float c2y = (float)(y2 + ((2f / 3f) * (y1 - y2)));
             //---------------------------------------------------------------------
             ps.AddBezier(
-                new PointF(lastX, lastY),
-                new PointF(c1x, c1y),
-                new PointF(c2x, c2y),
-                new PointF(lastX = (float)x2, lastY = (float)y2));
+                new PdfSharpCore.Drawing.XPoint(lastX, lastY),
+                new PdfSharpCore.Drawing.XPoint(c1x, c1y),
+                new PdfSharpCore.Drawing.XPoint(c2x, c2y),
+                new PdfSharpCore.Drawing.XPoint(lastX = (float)x2, lastY = (float)y2));
 
         }
+        
+        
         public void Curve4(float x1, float y1, float x2, float y2, float x3, float y3)
         {
             contour_is_closed = false;
             ps.AddBezier(
-                new PointF(lastX, lastY),
-                new PointF((float)x1, (float)y1),
-                new PointF((float)x2, (float)y2),
-                new PointF(lastX = (float)x3, lastY = (float)y3));
+                new PdfSharpCore.Drawing.XPoint(lastX, lastY), 
+                new PdfSharpCore.Drawing.XPoint((float)x1, (float)y1),
+                new PdfSharpCore.Drawing.XPoint((float)x2, (float)y2),
+                new PdfSharpCore.Drawing.XPoint(lastX = (float)x3, lastY = (float)y3));
         }
-
+        
+        
         public void LineTo(float x1, float y1)
         {
             contour_is_closed = false;
             ps.AddLine(
-                 new PointF(lastX, lastY),
-                 new PointF(lastX = (float)x1, lastY = (float)y1));
+                 new PdfSharpCore.Drawing.XPoint(lastX, lastY),
+                 new PdfSharpCore.Drawing.XPoint(lastX = (float)x1, lastY = (float)y1));
         }
-
+        
+        
         public void Reset()
         {
             ps = null;
             lastMoveX = lastMoveY = lastX = lastY = 0;
             contour_is_closed = true;
         }
-        public GraphicsPath ResultGraphicsPath => this.ps;
+        public PdfSharpCore.Drawing.XGraphicsPath ResultGraphicsPath => this.ps;
     }
-
+    
+    
 }
-

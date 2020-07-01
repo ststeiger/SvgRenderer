@@ -126,7 +126,7 @@ namespace SvgRenderer.Helpers
         {
             Typography.FontManagement.TypefaceStore store = GetTypeFaceStore(fontDirectory);
             // Typography.FontManagement.InstalledTypeface itf = GetFirstInstalledTypeface(fontDirectory);
-            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
+            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("SNT Anouvong", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Noto Mono", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Algerian", Typography.FontManagement.TypefaceStyle.Regular);
@@ -144,7 +144,7 @@ namespace SvgRenderer.Helpers
             // Trouble
             // // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Vivaldi", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Vivaldi", Typography.FontManagement.TypefaceStyle.Italic);
-            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetFontByPostScriptName("Vivaldii");
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetFontByPostScriptName("Vivaldii");
 
 
             if (s_not_printed)
