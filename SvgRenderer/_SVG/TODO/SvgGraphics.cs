@@ -117,12 +117,37 @@ namespace SvgRenderer
         // Ausnahmen: T:System.ArgumentNullException: brush is null. -or- path is null.
         public void FillPath(SvgSolidBrush brush, SvgPath path)
         {
+            DrawOrFillPath($"\" style=\"fill: {brush.Color}; stroke: none;\"", path);
+            
+            // this.m_stringBuilder.AppendLine("<!--");
+            // this.m_stringBuilder.AppendLine("FillPath: ");
+            // this.m_stringBuilder.Append(path.sb);
+            // this.m_stringBuilder.AppendLine();
+
+            // this.m_stringBuilder.AppendLine("Brush: " + brush.ToString());
+            // this.m_stringBuilder.AppendLine("-->");
+            // this.m_stringBuilder.AppendLine();
+        } // End Sub FillPath 
+
+
+        // Draws a System.Drawing.Drawing2D.GraphicsPath.
+        //   pen: System.Drawing.Pen that determines the color, width, and style of the path.
+        //   path: System.Drawing.Drawing2D.GraphicsPath to draw.
+        // Ausnahmen: T:System.ArgumentNullException: pen is null. -or- path is null.
+        public void DrawPath(SvgPen pen, SvgPath path)
+        {
+            DrawOrFillPath($"\" style=\"stroke: {pen.Color}; stroke-width:1px;\"", path);
+        }
+        
+        
+        public void DrawOrFillPath(string style, SvgPath path)
+        {
             this.m_stringBuilder.Append("<path d=\"");
             this.m_stringBuilder.Append(path.sb);
+            
             // stroke-width:0.26px
-            // this.m_stringBuilder.Append("\" style=\"fill: black;stroke:#000;stroke-width:1px;\"");
-            this.m_stringBuilder.Append("\" style=\"fill: black;stroke: none;\"");
-
+            this.m_stringBuilder.Append(style);
+            
             if (this.m_scale != null || this.m_translate != null)
             {
                 this.m_stringBuilder.Append(" transform=\"");
@@ -141,39 +166,13 @@ namespace SvgRenderer
             } // End if (this.m_scale != null || this.m_translate != null) 
 
             this.m_stringBuilder.AppendLine(" />");
-
-            // this.m_stringBuilder.AppendLine("<!--");
-            // this.m_stringBuilder.AppendLine("FillPath: ");
-            // this.m_stringBuilder.Append(path.sb);
-            // this.m_stringBuilder.AppendLine();
-
-            // this.m_stringBuilder.AppendLine("Brush: " + brush.ToString());
-            // this.m_stringBuilder.AppendLine("-->");
-            // this.m_stringBuilder.AppendLine();
-        } // End Sub FillPath 
-
-
-        // Draws a System.Drawing.Drawing2D.GraphicsPath.
-        //   pen: System.Drawing.Pen that determines the color, width, and style of the path.
-        //   path: System.Drawing.Drawing2D.GraphicsPath to draw.
-        // Ausnahmen: T:System.ArgumentNullException: pen is null. -or- path is null.
-        public void DrawPath(SvgPen pen, SvgPath path)
-        {
-            this.m_stringBuilder.AppendLine("<!--");
-            this.m_stringBuilder.AppendLine("DrawPath: ");
-            this.m_stringBuilder.Append(path.sb);
-            this.m_stringBuilder.AppendLine();
-            this.m_stringBuilder.AppendLine("Pen: " + pen.ToString());
-            this.m_stringBuilder.AppendLine("-->");
-            this.m_stringBuilder.AppendLine();
         } // End Sub DrawPath 
-
-
+        
+        
         public void Dispose()
         {
-            if (this.m_stringBuilder != null)
-                this.m_stringBuilder.Length = 0;
-
+            // Don't Clear the stringBuilder, classes are passed by reference.
+            // if (this.m_stringBuilder != null) this.m_stringBuilder.Length = 0;
             this.m_stringBuilder = null;
             this.m_rotate = null;
             this.m_scale = null;

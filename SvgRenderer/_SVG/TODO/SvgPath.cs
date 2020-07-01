@@ -23,6 +23,9 @@ namespace SvgRenderer
         } // End Sub Reset 
         
         
+        // https://github.com/mono/libgdiplus/blob/master/src/graphics-path.c#L109
+        // static VOID
+        // append (GpPath *path, float x, float y, PathPointType type, BOOL compress)
         protected void AppendToPath(string textToAppend)
         {
             if (this.sb.Length != 0)
@@ -36,14 +39,16 @@ namespace SvgRenderer
         {
             if (this.sb.Length != 0)
             {
-                //this.AppendToPath("Z");
-                this.AppendToPath($"m 0,0 L{this.m_initialPoint.X},{this.m_initialPoint.Y}");
+                this.AppendToPath("Z");
+                // this.AppendToPath($"m 0,0 L{this.m_initialPoint.X},{this.m_initialPoint.Y}");
             }
             
             m_initialPoint = null;
         } // End Sub CloseFigure 
         
         
+        // https://github.com/mono/libgdiplus/blob/master/src/graphics-path.c#L892
+        // https://github.com/mono/libgdiplus/blob/master/src/graphics-path.c#L157
         // Adds a cubic Bézier curve to the current figure.
         //   pt1: A System.Drawing.PointF that represents the starting point of the curve.
         //   pt2: A System.Drawing.PointF that represents the first control point for the curve.
@@ -62,9 +67,7 @@ namespace SvgRenderer
                 // this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
                 this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
             }
-
-
-
+            
             // lowercase c: relative coordinates
             // uppercase C: absolute coordinates
 
@@ -88,7 +91,7 @@ namespace SvgRenderer
                 this.AppendToPath($"L {pt1.X},{pt1.Y} L{pt2.X},{pt2.Y}");
                 // this.AppendToPath($"M{pt1.X},{pt1.Y} L{pt2.X},{pt2.Y}");
             }
-
+            
         } // End Sub AddLine 
         
         

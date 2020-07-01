@@ -23,10 +23,14 @@ namespace SvgRenderer
             if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
             {
                 fontDirectory = "/usr/share/fonts/truetype/ubuntu/";
+                
+                // font repository: https://github.com/LayoutFarm/Typography
+                fontDirectory = "/root/github/ststeiger/Typography/Demo/Windows/TestFonts";
             }
 
             if ("COR".Equals(System.Environment.UserDomainName, System.StringComparison.InvariantCultureIgnoreCase))
             {
+                // font repository: https://github.com/LayoutFarm/Typography
                 fontDirectory = @"D:\username\Documents\Visual Studio 2017\Projects\Typography\Demo\Windows\TestFonts";
             }
 
@@ -34,11 +38,16 @@ namespace SvgRenderer
             string textToPrint = "Hello World";
             textToPrint = "H";
             textToPrint = "A";
+            /*
             textToPrint = "HELLO";
             textToPrint = "HELiOS";
-            // textToPrint = "hello";
-            // textToPrint = "Halloween";
-
+            textToPrint = "hello";
+            textToPrint = "Halloween";
+            */
+            textToPrint = "COR-Basic";
+            textToPrint = ".NET Core";
+            // textToPrint = "Internet Exploder";
+            
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             // SkiaRenderer.Test(outputDirectory);

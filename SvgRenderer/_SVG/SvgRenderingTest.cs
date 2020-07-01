@@ -11,6 +11,86 @@ namespace SvgRenderer
 
     class SvgRenderingTest
     {
+        
+        
+        public static Typography.OpenFont.Typeface TypefaceFromFile(string fontFile)
+        {
+            Typography.OpenFont.Typeface tf;
+            
+            using (System.IO.FileStream fs = new System.IO.FileStream(fontFile, System.IO.FileMode.Open))
+            {
+                Typography.OpenFont.OpenFontReader fontReader = new Typography.OpenFont.OpenFontReader();
+                tf = fontReader.Read(fs);
+            }
+            
+            return tf;
+        }
+        
+        
+        public static TypefaceStore GetTypeFaceStore(string fontDirectory)
+        {
+            //1. create font collection             
+            InstalledTypefaceCollection installedFontCollection = new InstalledTypefaceCollection();
+
+            //2. set some essential handler
+            installedFontCollection.SetFontNameDuplicatedHandler((f1, f2) => FontNameDuplicatedDecision.Skip);
+
+            installedFontCollection.LoadFontsFromFolder(fontDirectory);
+            // installedFontCollection.LoadSystemFonts();
+            
+            installedFontCollection.UpdateUnicodeRanges();
+            
+            /*
+            InstalledTypeface firstTypeFace = null;
+            
+            foreach (InstalledTypeface thisTypeface in installedFontCollection.GetInstalledFontIter())
+            {
+                System.Console.Write(thisTypeface.FontName);
+                System.Console.Write(" | (");
+                System.Console.Write(thisTypeface.PostScriptName);
+                System.Console.WriteLine(")");
+                System.Console.WriteLine(thisTypeface.FontPath);
+                firstTypeFace = thisTypeface;
+                break;
+            }
+            */
+            
+            // installedFontCollection.GetInstalledTypeface("", TypefaceStyle.Regular);
+            // firstTypeFace = installedFontCollection.GetFontByPostScriptName("Asana-Math");
+            
+            TypefaceStore typefaceStore = new TypefaceStore();
+            typefaceStore.FontCollection = installedFontCollection;
+            
+            return typefaceStore;
+        }
+        
+        
+        public static Typeface GetRandomTypeFace(string fontDirectory)
+        {
+            TypefaceStore tfs = GetTypeFaceStore(fontDirectory);
+            
+            InstalledTypeface firstTypeFace = null;
+            
+            foreach (InstalledTypeface thisTypeface in tfs.FontCollection.GetInstalledFontIter())
+            {
+                System.Console.Write(thisTypeface.FontName);
+                System.Console.Write(" | (");
+                System.Console.Write(thisTypeface.PostScriptName);
+                System.Console.WriteLine(")");
+                System.Console.WriteLine(thisTypeface.FontPath);
+                firstTypeFace = thisTypeface;
+                break;
+            }
+            
+            // InstalledTypeface ifs = tfs.FontCollection.GetInstalledTypeface("SNT Anouvong", TypefaceStyle.Regular);
+            InstalledTypeface ifs = tfs.FontCollection.GetInstalledTypeface("Asana Math", TypefaceStyle.Regular);
+            return tfs.GetTypeface(firstTypeFace);
+            // firstTypeFace = installedFontCollection.GetFontByPostScriptName("Asana-Math");
+            
+            // return tfs.GetTypeface(firstTypeFace);
+        }
+
+
 
         public static void Test(string textToPrint, string fontDirectory, string outputDirectory)
         {
@@ -24,42 +104,17 @@ namespace SvgRenderer
                 g.Clear(System.Drawing.Color.White);
                 g.ScaleTransform(1.0F, -1.0F); // Flip the Y-Axis 
                 g.TranslateTransform(0.0F, -(float) 500); // Translate the drawing area accordingly   
-
-
-                //1. create font collection             
-                InstalledTypefaceCollection _installedFontCollection = new InstalledTypefaceCollection();
-
-                //2. set some essential handler
-                _installedFontCollection.SetFontNameDuplicatedHandler((f1, f2) => FontNameDuplicatedDecision.Skip);
-
-                _installedFontCollection.LoadFontsFromFolder(fontDirectory);
-                //installedFontCollection.LoadSystemFonts();
-                
-                InstalledTypeface ff = null;
-                
-                foreach (InstalledTypeface thisTypeface in _installedFontCollection.GetInstalledFontIter())
-                {
-                    System.Console.WriteLine(thisTypeface.FontName);
-                    ff = thisTypeface;
-                    break;
-                }
                 
                 
-                TypefaceStore _typefaceStore = new TypefaceStore();
-                _typefaceStore.FontCollection = _installedFontCollection;
-                _installedFontCollection.UpdateUnicodeRanges();
-
-
                 SvgTextPrinter _currentTextPrinter = new SvgTextPrinter();
                 _currentTextPrinter.ScriptLang = new ScriptLang(ScriptTagDefs.Thai.Tag);
-                _currentTextPrinter.Typeface = _typefaceStore.GetTypeface(ff);
+                _currentTextPrinter.Typeface = GetRandomTypeFace(fontDirectory);
                 _currentTextPrinter.FontSizeInPoints = 32;
-
-
-
+                
+                
                 _currentTextPrinter.FillBackground = true;
                 _currentTextPrinter.DrawOutline = false;
-
+                
                 //-----------------------  
                 _currentTextPrinter.HintTechnique = HintTechnique.None;
                 _currentTextPrinter.PositionTechnique = PositionTechnique.None;
@@ -67,8 +122,8 @@ namespace SvgRenderer
                 //render at specific pos
                 int lineSpacingPx = (int) System.Math.Ceiling(_currentTextPrinter.FontLineSpacingPx);
                 float x_pos = 0, y_pos = y_pos = lineSpacingPx * 2; //start 1st line
-
-
+                
+                
                 // test draw multiple lines
 
                 /*

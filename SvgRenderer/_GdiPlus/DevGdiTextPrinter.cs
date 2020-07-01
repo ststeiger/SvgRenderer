@@ -149,12 +149,14 @@ namespace SampleWinForms
             //this draw a single line text span*** 
             Graphics g = this.TargetGraphics;
             float baseline = y;
-            var snapToPxScale = new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
-
-
+            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale = 
+                new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
+            
             COLR colrTable = typeface.COLRTable;
             CPAL cpalTable = typeface.CPALTable;
-
+            
+            
+            
             bool canUseColorGlyph = EnableColorGlyph && colrTable != null && cpalTable != null;
 
             while (snapToPxScale.Read())
