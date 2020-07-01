@@ -23,8 +23,7 @@ namespace SvgRenderer
 
 
             string textToPrint = "Hello World";
-            textToPrint = "H";
-            textToPrint = "A";
+
             /*
             textToPrint = "HELLO";
             textToPrint = "HELiOS";
@@ -42,12 +41,14 @@ namespace SvgRenderer
             textToPrint = "សួស្តី​ពិភពលោក"; // Khmer
             textToPrint = "こんにちは世界"; // Japanese 
             textToPrint = "안녕 세상"; // Korean
-
+            textToPrint = "Γειά σου Κόσμε"; // Greek
             */
-            
+
             textToPrint = ".NET Core";
-            textToPrint = "1. Obergeschoss";
             textToPrint = "1st Floor";
+            textToPrint = "1ος όροφος";
+            // textToPrint = "1-й этаж";
+            textToPrint = "1. Obergeschoss";
 
 
             if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
