@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgRenderer", "SvgRenderer\SvgRenderer.csproj", "{2B48917A-537A-470B-9BE3-695B527A4EFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgRenderer", "SvgRenderer\SvgRenderer.csproj", "{2B48917A-537A-470B-9BE3-695B527A4EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typography.TextBreak", "Typography.TextBreak\Typography.TextBreak.csproj", "{F4D776BF-DF94-42B5-8B50-57219544C040}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Typography.TextBreak", "Typography.TextBreak\Typography.TextBreak.csproj", "{F4D776BF-DF94-42B5-8B50-57219544C040}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typography.OpenFont", "Typography.OpenFont\Typography.OpenFont.csproj", "{60B8DB16-77AD-4809-BEF6-E6ED43462246}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Typography.OpenFont", "Typography.OpenFont\Typography.OpenFont.csproj", "{60B8DB16-77AD-4809-BEF6-E6ED43462246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typography.GlyphLayout", "Typography.GlyphLayout\Typography.GlyphLayout.csproj", "{29A53508-8FC4-4FF4-B063-261D086FDE58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Typography.GlyphLayout", "Typography.GlyphLayout\Typography.GlyphLayout.csproj", "{29A53508-8FC4-4FF4-B063-261D086FDE58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

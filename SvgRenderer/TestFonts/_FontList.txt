@@ -1,0 +1,29 @@
+﻿
+==================================
+List of installed typefaces:
+==================================
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\TestFonts\Asana-Math.otf
+FontName: Asana Math
+PostScriptName: Asana-Math
+TypographicFamilyName: Asana Math
+TypographicFontSubFamily: Regular
+FontSubFamily: Regular
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\TestFonts\NotoMono-Regular.ttf
+FontName: Noto Mono
+PostScriptName: NotoMono
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Regular
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\TestFonts\SNT Anouvong Regular.ttf
+FontName: SNT Anouvong
+PostScriptName: SNTAnouvong
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Regular
+TypefaceStyle: Regular

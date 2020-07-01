@@ -74,7 +74,10 @@ namespace SvgRenderer.Helpers
                 System.Console.WriteLine(itf.TypefaceStyle);
 
                 if (itf.Languages != null && itf.Languages.SupportedLangs != null)
+                {
+                    System.Console.Write("SupportedLangs: ");
                     System.Console.WriteLine(string.Join(", ", itf.Languages.SupportedLangs));
+                }
 
                 System.Console.WriteLine(System.Environment.NewLine);
             }
@@ -123,9 +126,26 @@ namespace SvgRenderer.Helpers
         {
             Typography.FontManagement.TypefaceStore store = GetTypeFaceStore(fontDirectory);
             // Typography.FontManagement.InstalledTypeface itf = GetFirstInstalledTypeface(fontDirectory);
-            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("SNT Anouvong", Typography.FontManagement.TypefaceStyle.Regular);
             // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Noto Mono", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Algerian", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Bahnschrift", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Comic Sans MS", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Consolas", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Courier New", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("OCR A Extended", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Old English Text MT", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Arial", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Verdana", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Times New Roman", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Palatino Linotype", Typography.FontManagement.TypefaceStyle.Regular);
+
+            // Trouble
+            // // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Vivaldi", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Vivaldi", Typography.FontManagement.TypefaceStyle.Italic);
+            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetFontByPostScriptName("Vivaldii");
+
 
             if (s_not_printed)
             {
@@ -145,7 +165,11 @@ namespace SvgRenderer.Helpers
                 System.Console.WriteLine(itf.TypefaceStyle);
 
                 if (itf.Languages != null && itf.Languages.SupportedLangs != null)
+                {
+                    System.Console.Write("SupportedLangs: ");
                     System.Console.WriteLine(string.Join(", ", itf.Languages.SupportedLangs));
+                }
+                    
 
                 s_not_printed = false;
             } // End if (s_not_printed) 

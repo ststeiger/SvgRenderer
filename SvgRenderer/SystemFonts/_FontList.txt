@@ -1,0 +1,432 @@
+﻿
+==================================
+List of installed typefaces:
+==================================
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\ALGER.TTF
+FontName: Algerian
+PostScriptName: Algerian
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\arial.ttf
+FontName: Arial
+PostScriptName: ArialMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\bahnschrift.ttf
+FontName: Bahnschrift
+PostScriptName: Bahnschrift
+TypographicFamilyName: Bahnschrift
+TypographicFontSubFamily:
+FontSubFamily: Regular
+TypefaceStyle: Regular
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\comic.ttf
+FontName: Comic Sans MS
+PostScriptName: ComicSansMS
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\consola.ttf
+FontName: Consolas
+PostScriptName: Consolas
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Regular
+TypefaceStyle: Regular
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\cour.ttf
+FontName: Courier New
+PostScriptName: CourierNewPSMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\OCRAEXT.TTF
+FontName: OCR A Extended
+PostScriptName: OCRAExtended
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\OLDENGL.TTF
+FontName: Old English Text MT
+PostScriptName: OldEnglishTextMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\pala.ttf
+FontName: Palatino Linotype
+PostScriptName: PalatinoLinotype-Roman
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\tahoma.ttf
+FontName: Tahoma
+PostScriptName: Tahoma
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn, Thai
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\times.ttf
+FontName: Times New Roman
+PostScriptName: TimesNewRomanPSMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\verdana.ttf
+FontName: Verdana
+PostScriptName: Verdana
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\ariali.ttf
+FontName: Arial
+PostScriptName: Arial-ItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\comici.ttf
+FontName: Comic Sans MS
+PostScriptName: ComicSansMS-Italic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\consolai.ttf
+FontName: Consolas
+PostScriptName: Consolas-Italic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italic
+TypefaceStyle: Italic
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\couri.ttf
+FontName: Courier New
+PostScriptName: CourierNewPS-ItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\palai.ttf
+FontName: Palatino Linotype
+PostScriptName: PalatinoLinotype-Italic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\timesi.ttf
+FontName: Times New Roman
+PostScriptName: TimesNewRomanPS-ItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\verdanai.ttf
+FontName: Verdana
+PostScriptName: Verdana-Italic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\VIVALDII.TTF
+FontName: Vivaldi
+PostScriptName: Vivaldii
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Italique
+TypefaceStyle: Italic
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\arialbd.ttf
+FontName: Arial
+PostScriptName: Arial-BoldMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\comicbd.ttf
+FontName: Comic Sans MS
+PostScriptName: ComicSansMS-Bold
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\consolab.ttf
+FontName: Consolas
+PostScriptName: Consolas-Bold
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Bold
+TypefaceStyle: Bold
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\courbd.ttf
+FontName: Courier New
+PostScriptName: CourierNewPS-BoldMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\palab.ttf
+FontName: Palatino Linotype
+PostScriptName: PalatinoLinotype-Bold
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\tahomabd.ttf
+FontName: Tahoma
+PostScriptName: Tahoma-Bold
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn, Thai
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\timesbd.ttf
+FontName: Times New Roman
+PostScriptName: TimesNewRomanPS-BoldMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Arab, Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\verdanab.ttf
+FontName: Verdana
+PostScriptName: Verdana-Bold
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras
+TypefaceStyle: Bold
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\arialbi.ttf
+FontName: Arial
+PostScriptName: Arial-BoldItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\comicz.ttf
+FontName: Comic Sans MS
+PostScriptName: ComicSansMS-BoldItalic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\consolaz.ttf
+FontName: Consolas
+PostScriptName: Consolas-BoldItalic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Bold Italic
+TypefaceStyle: Bold, Italic
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\courbi.ttf
+FontName: Courier New
+PostScriptName: CourierNewPS-BoldItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\palabi.ttf
+FontName: Palatino Linotype
+PostScriptName: PalatinoLinotype-BoldItalic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\timesbi.ttf
+FontName: Times New Roman
+PostScriptName: TimesNewRomanPS-BoldItalicMT
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Armn, Cyrl, Grek, Hebr, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\verdanaz.ttf
+FontName: Verdana
+PostScriptName: Verdana-BoldItalic
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily: Gras Italique
+TypefaceStyle: Bold, Italic
+SupportedLangs: Armn, Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\ARIALN.TTF
+FontName: Arial Narrow
+PostScriptName: ArialNarrow
+TypographicFamilyName: Arial
+TypographicFontSubFamily: Narrow
+FontSubFamily: Normal
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\ariblk.ttf
+FontName: Arial Black
+PostScriptName: Arial-Black
+TypographicFamilyName: Arial
+TypographicFontSubFamily: Black
+FontSubFamily: Normal
+TypefaceStyle: Regular
+SupportedLangs: Cyrl, Grek, Latn
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\sanssb__.ttf
+FontName:  S a n s S e r i f
+PostScriptName:  S a n s S e r i f B o l d
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  B o l d
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\sansso__.ttf
+FontName:  S a n s S e r i f
+PostScriptName:  S a n s S e r i f O b l i q u e
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  O b l i q u e
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\sanss___.ttf
+FontName:  S a n s S e r i f
+PostScriptName:  S a n s S e r i f
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  R e g u l a r
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\webdings.ttf
+FontName:  W e b d i n g s
+PostScriptName:  W e b d i n g s
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  N o r m a l
+TypefaceStyle: Regular
+SupportedLangs: Zsym
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\wingding.ttf
+FontName:  W i n g d i n g s
+PostScriptName:  W i n g d i n g s - R e g u l a r
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  N o r m a l
+TypefaceStyle: Regular
+SupportedLangs: Zsym
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\WINGDNG2.TTF
+FontName:  W i n g d i n g s   2
+PostScriptName:  W i n g d i n g s 2
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  N o r m a l
+TypefaceStyle: Regular
+
+
+FontPath: D:\username\Documents\Visual Studio 2017\Projects\SvgRenderer\SvgRenderer\SystemFonts\WINGDNG3.TTF
+FontName:  W i n g d i n g s   3
+PostScriptName:  W i n g d i n g s 3
+TypographicFamilyName:
+TypographicFontSubFamily:
+FontSubFamily:  N o r m a l
+TypefaceStyle: Regular

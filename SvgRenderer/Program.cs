@@ -12,14 +12,57 @@ namespace SvgRenderer
     class Program
     {
 
+        public static void TestGdiFont()
+        {
+            // System.Drawing.Text.PrivateFontCollection myFonts = new System.Drawing.Text.PrivateFontCollection();
+            // myFonts.AddFontFile(@"C:\path\to\BLACKR.TTF");
+            // System.Drawing.Font oFont = new System.Drawing.Font(myFonts.Families[0], 20);
+
+            // https://stackoverflow.com/questions/16769758/get-a-font-filename-based-on-the-font-handle-hfont
+            // Get font as stream
+
+
+            System.Drawing.FontFamily fontFamily = new System.Drawing.FontFamily("Arial");
+            System.Drawing.Font font = new System.Drawing.Font(
+               fontFamily,
+               16,
+               System.Drawing.FontStyle.Regular,
+               System.Drawing.GraphicsUnit.Pixel);
+
+            System.IntPtr handleToFont = font.ToHfont();
+
+
+
+            AspNetCore.ReportingServices.Rendering.ExcelRenderer.Excel.LOGFONT lOGFONT = new AspNetCore.ReportingServices.Rendering.ExcelRenderer.Excel.LOGFONT();
+            font.ToLogFont(lOGFONT);
+
+            AspNetCore.ReportingServices.Rendering.ExcelRenderer.Excel.CharSet cs = (AspNetCore.ReportingServices.Rendering.ExcelRenderer.Excel.CharSet)lOGFONT.lfCharSet;
+
+            System.Console.WriteLine(lOGFONT.lfFaceName);
+
+
+            
+
+            // font.IsSystemFont
+            System.Console.WriteLine(font.Name);
+            System.Console.WriteLine(font.OriginalFontName);
+            System.Console.WriteLine(font.SystemFontName); 
+            System.Console.WriteLine(font.FontFamily.Name);
+
+        }
+
+
 
         static void Main(string[] args)
         {
+            TestGdiFont();
+
             string outputDirectory = System.IO.Path.GetDirectoryName( typeof(Program).Assembly.Location);
             outputDirectory = System.IO.Path.Combine(outputDirectory, "..", "..", "..");
             outputDirectory = System.IO.Path.GetFullPath(outputDirectory);
             string fontDirectory = System.IO.Path.Combine(outputDirectory, "TestFonts");
-            // Helpers.FontHelper.ListInstalledTypefaces(fontDirectory);
+            // string fontDirectory = System.IO.Path.Combine(outputDirectory, "SystemFonts");
+            Helpers.FontHelper.ListInstalledTypefaces(fontDirectory);
 
 
             string textToPrint = "Hello World";
@@ -48,7 +91,7 @@ namespace SvgRenderer
             textToPrint = "1st Floor";
             textToPrint = "1ος όροφος";
             // textToPrint = "1-й этаж";
-            textToPrint = "1. Obergeschoss";
+            textToPrint = "1. Obergeschoss äöüÄÖÜ";
 
 
             if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
