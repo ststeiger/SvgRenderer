@@ -19,6 +19,7 @@ namespace SvgRenderer
             outputDirectory = System.IO.Path.Combine(outputDirectory, "..", "..", "..");
             outputDirectory = System.IO.Path.GetFullPath(outputDirectory);
             string fontDirectory = System.IO.Path.Combine(outputDirectory, "TestFonts");
+            // Helpers.FontHelper.ListInstalledTypefaces(fontDirectory);
 
 
             string textToPrint = "Hello World";

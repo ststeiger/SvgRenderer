@@ -45,24 +45,57 @@ namespace SvgRenderer.Helpers
         } // End Function GetTypeFaceStore 
 
 
-        public static Typography.OpenFont.Typeface GetFirstTypeFaceInDirectory(string fontDirectory)
+        public static void ListInstalledTypefaces(string fontDirectory)
+        {
+            Typography.FontManagement.TypefaceStore store = GetTypeFaceStore(fontDirectory);
+
+
+            System.Console.WriteLine(System.Environment.NewLine);
+            System.Console.WriteLine("==================================");
+            System.Console.WriteLine("List of installed typefaces: ");
+            System.Console.WriteLine("==================================");
+
+
+            foreach (Typography.FontManagement.InstalledTypeface itf in store.FontCollection.GetInstalledFontIter())
+            {
+                System.Console.Write("FontPath: ");
+                System.Console.WriteLine(itf.FontPath);
+                System.Console.Write("FontName: ");
+                System.Console.WriteLine(itf.FontName);
+                System.Console.Write("PostScriptName: ");
+                System.Console.WriteLine(itf.PostScriptName);
+                System.Console.Write("TypographicFamilyName: ");
+                System.Console.WriteLine(itf.TypographicFamilyName);
+                System.Console.Write("TypographicFontSubFamily: ");
+                System.Console.WriteLine(itf.TypographicFontSubFamily);
+                System.Console.Write("FontSubFamily: ");
+                System.Console.WriteLine(itf.FontSubFamily);
+                System.Console.Write("TypefaceStyle: ");
+                System.Console.WriteLine(itf.TypefaceStyle);
+
+                if (itf.Languages != null && itf.Languages.SupportedLangs != null)
+                    System.Console.WriteLine(string.Join(", ", itf.Languages.SupportedLangs));
+
+                System.Console.WriteLine(System.Environment.NewLine);
+            }
+
+            System.Console.WriteLine("-------------------------");
+            System.Console.WriteLine(System.Environment.NewLine);
+        } // End Function GetTestTypeface 
+
+
+        public static Typography.FontManagement.InstalledTypeface GetFirstInstalledTypeface(string fontDirectory)
         {
             Typography.FontManagement.TypefaceStore tfs = GetTypeFaceStore(fontDirectory);
-
             Typography.FontManagement.InstalledTypeface firstTypeFace = null;
 
             foreach (Typography.FontManagement.InstalledTypeface thisTypeface in tfs.FontCollection.GetInstalledFontIter())
             {
-                System.Console.Write(thisTypeface.FontName);
-                System.Console.Write(" | (");
-                System.Console.Write(thisTypeface.PostScriptName);
-                System.Console.WriteLine(")");
-                System.Console.WriteLine(thisTypeface.FontPath);
                 firstTypeFace = thisTypeface;
                 break;
             } // Next thisTypeface 
 
-            return tfs.GetTypeface(firstTypeFace);
+            return firstTypeFace;
         } // End Function GetFirstTypeFaceInDirectory 
 
 
@@ -75,7 +108,7 @@ namespace SvgRenderer.Helpers
         } // End Function GetFontByPostScriptName 
 
 
-        public static Typography.OpenFont.Typeface GetFontByFontName(string fontDirectory, string fontName = "Asana Math", Typography.FontManagement.TypefaceStyle tfs = Typography.FontManagement.TypefaceStyle.Regular)
+        public static Typography.OpenFont.Typeface GetFontByFontName(string fontDirectory, string fontName, Typography.FontManagement.TypefaceStyle tfs)
         {
             Typography.FontManagement.TypefaceStore store = GetTypeFaceStore(fontDirectory);
             Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface(fontName, tfs);
@@ -84,18 +117,15 @@ namespace SvgRenderer.Helpers
         } // End Function GetFontByFontName 
 
 
-        public static Typography.OpenFont.Typeface GetSntAnouvong(string fontDirectory)
-        {
-            return GetFontByFontName(fontDirectory, "SNT Anouvong", Typography.FontManagement.TypefaceStyle.Regular);
-        } // End Function GetSntAnouvong 
-
-
         private static bool s_not_printed = true;
 
         public static Typography.OpenFont.Typeface GetTestTypeface(string fontDirectory)
         {
             Typography.FontManagement.TypefaceStore store = GetTypeFaceStore(fontDirectory);
-            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = GetFirstInstalledTypeface(fontDirectory);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Asana Math", Typography.FontManagement.TypefaceStyle.Regular);
+            // Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("SNT Anouvong", Typography.FontManagement.TypefaceStyle.Regular);
+            Typography.FontManagement.InstalledTypeface itf = store.FontCollection.GetInstalledTypeface("Noto Mono", Typography.FontManagement.TypefaceStyle.Regular);
 
             if (s_not_printed)
             {
@@ -118,7 +148,7 @@ namespace SvgRenderer.Helpers
                     System.Console.WriteLine(string.Join(", ", itf.Languages.SupportedLangs));
 
                 s_not_printed = false;
-            }
+            } // End if (s_not_printed) 
 
             return store.GetTypeface(itf);
         } // End Function GetTestTypeface 
