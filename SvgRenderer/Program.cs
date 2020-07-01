@@ -2,13 +2,13 @@
 namespace SvgRenderer
 {
 
+
     // https://docs.microsoft.com/en-us/typography/opentype/spec/otff
     // https://en.wikipedia.org/wiki/TrueType
     // https://formats.kaitai.io/ttf/index.html
     // https://formats.kaitai.io/ttf/ttf.svg
     // https://github.com/PaintLab/SaveAsPdf
     // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/graphics/skiasharp/curves/text-paths
-
     class Program
     {
 
@@ -34,6 +34,14 @@ namespace SvgRenderer
             textToPrint = "COR-Basic";
             textToPrint = ".NET Core";
             // textToPrint = "Internet Exploder";
+
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+            {
+                System.Console.WriteLine(System.Environment.NewLine);
+                System.Console.WriteLine("The GDI-renderer needs libgdiplus.so/libgdiplus.dylib from the mono-project.");
+                System.Console.WriteLine("sudo apt-get install -y libgdiplus");
+                System.Console.WriteLine(System.Environment.NewLine);
+            }
             
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
@@ -50,10 +58,10 @@ namespace SvgRenderer
             System.Console.WriteLine(System.Environment.NewLine);
             System.Console.WriteLine(" --- Press any key to continue --- ");
             // System.Console.ReadKey();
-        }
+        } // End Sub Main(string[] args)
 
 
-    }
+    } // End Class Program 
 
 
-}
+} // End Namespace SvgRenderer 
