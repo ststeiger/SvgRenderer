@@ -58,16 +58,17 @@ namespace SvgRenderer
         {
             if (this.m_initialPoint == null)
             {
-                this.m_initialPoint = pt1;    
-                this.AppendToPath($"M {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
+                this.m_initialPoint = pt1;
+                // this.AppendToPath($"M {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}"); funny
+                this.AppendToPath($"M {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt4.Y}");
             }
             else
             {
-                // this.AppendToPath($"C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
-                // this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
-                this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}");
+                //this.AppendToPath($"C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt4.Y}");
+                // this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt1.Y}"); // funny 
+                this.AppendToPath($"L {pt1.X},{pt1.Y} C {pt2.X},{pt2.Y} {pt3.X},{pt3.Y} {pt4.X},{pt4.Y}");
             }
-            
+
             // lowercase c: relative coordinates
             // uppercase C: absolute coordinates
 

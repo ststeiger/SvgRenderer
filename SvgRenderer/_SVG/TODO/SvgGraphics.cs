@@ -52,15 +52,27 @@ namespace SvgRenderer
         } // End Sub WriteEndFile 
 
 
+        protected string m_text;
+        protected string m_fontName;
+        protected string m_fontSizeInPoints;
+
+        public void SetTextAndFont(string text, string fontName, float sizeInPoints )
+        {
+            this.m_text = text;
+            this.m_fontName = fontName;
+            this.m_fontSizeInPoints = sizeInPoints.ToString(System.Globalization.CultureInfo.InvariantCulture) + "pt";
+        }
+
 
         public void OpenGroup()
         {
-            this.m_stringBuilder.Append("<g>");
+            this.m_stringBuilder.AppendLine("<g data-text=\"" + this.m_text + "\" data-font=\"" + this.m_fontName + "\" data-fontsize=\"" + this.m_fontSizeInPoints + "\">");
         }
+
 
         public void CloseGroup()
         {
-            this.m_stringBuilder.Append("</g>");
+            this.m_stringBuilder.AppendLine("</g>");
         }
 
 

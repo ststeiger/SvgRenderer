@@ -14,24 +14,42 @@ namespace SampleWinForms
     /// </summary>
     class DevGdiTextPrinter : TextPrinterBase
     {
-        Typeface _currentTypeface;
-        GlyphOutlineBuilder _currentGlyphPathBuilder;
-        GlyphTranslatorToGdiPath _txToGdiPath;
-        GlyphLayout _glyphLayout = new GlyphLayout();
-        System.Drawing.SolidBrush _fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-        System.Drawing.Pen _outlinePen = new System.Drawing.Pen(System.Drawing.Color.Green);
-        //
+        protected Typeface _currentTypeface;
+        protected GlyphOutlineBuilder _currentGlyphPathBuilder;
+        protected GlyphTranslatorToGdiPath _txToGdiPath;
+        protected GlyphLayout _glyphLayout = new GlyphLayout();
+        protected System.Drawing.SolidBrush _fillBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+        protected System.Drawing.Pen _outlinePen = new System.Drawing.Pen(System.Drawing.Color.Green);
+
         //for optimization
-        GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath> _glyphMeshCollections = new GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath>();
+        protected GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath> _glyphMeshCollections = new GlyphMeshCollection<System.Drawing.Drawing2D.GraphicsPath>();
+        protected UnscaledGlyphPlanList _reusableUnscaledGlyphPlanList = new UnscaledGlyphPlanList();
+
+        public override GlyphLayout GlyphLayoutMan
+        {
+            get
+            {
+                return _glyphLayout;
+            }
+        } // End Property GlyphLayoutMan 
+
+
+        public bool EnableColorGlyph { get; set; } = true;
+        public System.Drawing.Color FillColor { get; set; }
+        public System.Drawing.Color OutlineColor { get; set; }
+
+        public System.Drawing.Graphics TargetGraphics { get; set; }
+
+
 
         public DevGdiTextPrinter()
         {
             FillBackground = true;
             FillColor = System.Drawing.Color.Black;
             OutlineColor = System.Drawing.Color.Green;
-        }
+        } // End Constructor 
 
-        public override GlyphLayout GlyphLayoutMan => _glyphLayout;
+
         public override Typeface Typeface
         {
             get => _currentTypeface;
@@ -59,9 +77,11 @@ namespace SampleWinForms
                 _txToGdiPath = new GlyphTranslatorToGdiPath();
                 //4.
                 OnFontSizeChanged();
-            }
+            } // End Set 
 
-        }
+        } // End Property Typeface 
+
+
         protected override void OnFontSizeChanged()
         {
             //update some font matrix property  
@@ -72,47 +92,29 @@ namespace SampleWinForms
                 this.FontDescedingPx = Typeface.Descender * pointToPixelScale;
                 this.FontLineGapPx = Typeface.LineGap * pointToPixelScale;
                 this.FontLineSpacingPx = FontAscendingPx - FontDescedingPx + FontLineGapPx;
-            }
-        }
+            } // End if (Typeface != null) 
 
-        public bool EnableColorGlyph { get; set; } = true;
-        public System.Drawing.Color FillColor { get; set; }
-        public System.Drawing.Color OutlineColor { get; set; }
-        public System.Drawing.Graphics TargetGraphics { get; set; }
-
-        UnscaledGlyphPlanList _reusableUnscaledGlyphPlanList = new UnscaledGlyphPlanList();
-        public override void DrawString(char[] textBuffer, int startAt, int len, float x, float y)
-        {
-
-            _reusableUnscaledGlyphPlanList.Clear();
-            //1. unscale layout, in design unit
-            _glyphLayout.Layout(textBuffer, startAt, len);
-            _glyphLayout.GenerateUnscaledGlyphPlans(_reusableUnscaledGlyphPlanList);
-
-            //draw from the glyph plan seq
-
-            DrawFromGlyphPlans(
-                new GlyphPlanSequence(_reusableUnscaledGlyphPlanList),
-                x, y);
+        } // End Sub OnFontSizeChanged 
 
 
-        }
         public void UpdateGlyphLayoutSettings()
         {
             _glyphLayout.Typeface = this.Typeface;
             _glyphLayout.ScriptLang = this.ScriptLang;
             _glyphLayout.PositionTechnique = this.PositionTechnique;
             _glyphLayout.EnableLigature = this.EnableLigature;
+        } // End Sub UpdateGlyphLayoutSettings 
 
-        }
-        void UpdateVisualOutputSettings()
+
+        protected void UpdateVisualOutputSettings()
         {
             _currentGlyphPathBuilder.SetHintTechnique(this.HintTechnique);
             _fillBrush.Color = this.FillColor;
             _outlinePen.Color = this.OutlineColor;
-        }
+        } // End Sub UpdateVisualOutputSettings 
 
-        System.Drawing.Drawing2D.GraphicsPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
+
+        protected System.Drawing.Drawing2D.GraphicsPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
         {
             if (!_glyphMeshCollections.TryGetCacheGlyph(glyphIndex, out System.Drawing.Drawing2D.GraphicsPath path))
             {
@@ -124,11 +126,13 @@ namespace SampleWinForms
 
                 //register
                 _glyphMeshCollections.RegisterCachedGlyph(glyphIndex, path);
-            }
+            } // End if (!_glyphMeshCollections.TryGetCacheGlyph(glyphIndex, out System.Drawing.Drawing2D.GraphicsPath path)) 
 
             return path;
-        }
+        } // End Function GetExistingOrCreateGraphicsPath 
 
+
+        // public override void DrawFromGlyphPlans(GlyphPlanSequence glyphPlanList, int startAt, int len, float left, float top)
         public override void DrawFromGlyphPlans(GlyphPlanSequence seq, int startAt, int len, float x, float y)
         {
             UpdateVisualOutputSettings();
@@ -172,14 +176,12 @@ namespace SampleWinForms
                         System.Drawing.Drawing2D.GraphicsPath path = GetExistingOrCreateGraphicsPath(colrTable.GlyphLayers[c]);
                         if (path == null)
                         {
-                            //???
 #if DEBUG
                             System.Diagnostics.Debug.WriteLine("gdi_printer: no path?");
 #endif
                             continue;
                         }
 
-                        //------
                         //then move pen point to the position we want to draw a glyph
                         float cx = (float)System.Math.Round(snapToPxScale.ExactX + x);
                         float cy = (float)System.Math.Floor(snapToPxScale.ExactY + baseline);
@@ -200,9 +202,10 @@ namespace SampleWinForms
                         {
                             g.DrawPath(_outlinePen, path);
                         }
-                        //and then we reset back ***
+
+                        // and then we reset back
                         g.TranslateTransform(-cx, -cy);
-                    }
+                    } // Next c 
                 }
                 else
                 {
@@ -234,9 +237,27 @@ namespace SampleWinForms
                     }
                     //and then we reset back ***
                     g.TranslateTransform(-cx, -cy);
-                }
-            }
-        }
+                } // End else of if (canUseColorGlyph && colrTable.LayerIndices.TryGetValue(glyphIndex, out ushort colorLayerStart))
 
-    }
-}
+            } // Whend 
+
+        } // End Sub DrawFromGlyphPlans 
+
+
+        public override void DrawString(char[] textBuffer, int startAt, int len, float x, float y)
+        {
+            _reusableUnscaledGlyphPlanList.Clear();
+            //1. unscale layout, in design unit
+            _glyphLayout.Layout(textBuffer, startAt, len);
+            _glyphLayout.GenerateUnscaledGlyphPlans(_reusableUnscaledGlyphPlanList);
+
+
+            //draw from the glyph plan seq
+            DrawFromGlyphPlans(new GlyphPlanSequence(_reusableUnscaledGlyphPlanList), x, y);
+        } // End Sub DrawString 
+
+
+    } // End Class DevGdiTextPrinter 
+
+
+} // End Namespace SampleWinForms

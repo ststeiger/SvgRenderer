@@ -13,30 +13,17 @@ namespace SvgRenderer
         : TextPrinterBase
     {
 
-        Typeface _currentTypeface;
-        GlyphOutlineBuilder _currentGlyphPathBuilder;
-        GlyphTranslatorToSvgPath _txToGdiPath;
-        GlyphLayout _glyphLayout = new GlyphLayout();
-        SvgSolidBrush _fillBrush = new SvgSolidBrush(SvgColor.Black);
-        SvgPen _outlinePen = new SvgPen(SvgColor.Green);
+
+        protected Typeface _currentTypeface;
+        protected GlyphOutlineBuilder _currentGlyphPathBuilder;
+        protected GlyphTranslatorToSvgPath _txToGdiPath;
+        protected GlyphLayout _glyphLayout = new GlyphLayout();
+        protected SvgSolidBrush _fillBrush = new SvgSolidBrush(SvgColor.Black);
+        protected SvgPen _outlinePen = new SvgPen(SvgColor.Green);
 
         //for optimization
-        GlyphMeshCollection<SvgPath> _glyphMeshCollections = new GlyphMeshCollection<SvgPath>();
-
-        UnscaledGlyphPlanList _reusableUnscaledGlyphPlanList = new UnscaledGlyphPlanList();
-
-
-        public bool EnableColorGlyph { get; set; } = true;
-        public string FillColor { get; set; }
-        public string OutlineColor { get; set; }
-
-
-        public SvgTextPrinter()
-        {
-            FillBackground = true;
-            FillColor = SvgColor.Black;
-            OutlineColor = SvgColor.Green;
-        }
+        protected GlyphMeshCollection<SvgPath> _glyphMeshCollections = new GlyphMeshCollection<SvgPath>();
+        protected UnscaledGlyphPlanList _reusableUnscaledGlyphPlanList = new UnscaledGlyphPlanList();
 
 
         public override GlyphLayout GlyphLayoutMan
@@ -45,8 +32,23 @@ namespace SvgRenderer
             {
                 return _glyphLayout;
             }
-        }
+        } // End Property GlyphLayoutMan 
 
+
+        public bool EnableColorGlyph { get; set; } = true;
+        public string FillColor { get; set; }
+        public string OutlineColor { get; set; }
+
+        public SvgGraphics TargetGraphics { get; set; }
+
+
+
+        public SvgTextPrinter()
+        {
+            FillBackground = true;
+            FillColor = SvgColor.Black;
+            OutlineColor = SvgColor.Green;
+        } // End Constructor 
 
 
         public override Typeface Typeface
@@ -79,7 +81,9 @@ namespace SvgRenderer
                 //4.
                 OnFontSizeChanged();
             }
-        }
+
+        } // End Property Typeface 
+
 
         protected override void OnFontSizeChanged()
         {
@@ -91,8 +95,10 @@ namespace SvgRenderer
                 this.FontDescedingPx = Typeface.Descender * pointToPixelScale;
                 this.FontLineGapPx = Typeface.LineGap * pointToPixelScale;
                 this.FontLineSpacingPx = FontAscendingPx - FontDescedingPx + FontLineGapPx;
-            }
-        }
+            } // End if (Typeface != null) 
+
+        } // End Sub OnFontSizeChanged 
+
 
         public void UpdateGlyphLayoutSettings()
         {
@@ -100,17 +106,18 @@ namespace SvgRenderer
             _glyphLayout.ScriptLang = this.ScriptLang;
             _glyphLayout.PositionTechnique = this.PositionTechnique;
             _glyphLayout.EnableLigature = this.EnableLigature;
+        } // End Sub UpdateGlyphLayoutSettings 
 
-        }
-        void UpdateVisualOutputSettings()
+
+        protected void UpdateVisualOutputSettings()
         {
             _currentGlyphPathBuilder.SetHintTechnique(this.HintTechnique);
             _fillBrush.Color = this.FillColor;
             _outlinePen.Color = this.OutlineColor;
-        }
+        } // End Function UpdateVisualOutputSettings 
 
 
-        SvgPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
+        protected SvgPath GetExistingOrCreateGraphicsPath(ushort glyphIndex)
         {
             if (!_glyphMeshCollections.TryGetCacheGlyph(glyphIndex, out SvgPath path))
             {
@@ -125,12 +132,7 @@ namespace SvgRenderer
             }
 
             return path;
-        }
-
-
-
-
-        public SvgGraphics TargetGraphics { get; set; }
+        } // End Function GetExistingOrCreateGraphicsPath 
 
 
         // public override void DrawFromGlyphPlans(GlyphPlanSequence glyphPlanList, int startAt, int len, float left, float top)
@@ -152,10 +154,8 @@ namespace SvgRenderer
             //this draw a single line text span*** 
             SvgGraphics g = this.TargetGraphics;
             float baseline = y;
-            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale = 
+            GlyphPlanSequenceSnapPixelScaleLayout snapToPxScale =
                 new GlyphPlanSequenceSnapPixelScaleLayout(seq, startAt, len, pxscale);
-
-            g.OpenGroup();
 
             COLR colrTable = typeface.COLRTable;
             CPAL cpalTable = typeface.CPALTable;
@@ -168,7 +168,6 @@ namespace SvgRenderer
 
                 if (canUseColorGlyph && colrTable.LayerIndices.TryGetValue(glyphIndex, out ushort colorLayerStart))
                 {
-
                     ushort colorLayerCount = colrTable.LayerCounts[glyphIndex];
 
                     for (int c = colorLayerStart; c < colorLayerStart + colorLayerCount; ++c)
@@ -177,14 +176,12 @@ namespace SvgRenderer
                         SvgPath path = GetExistingOrCreateGraphicsPath(colrTable.GlyphLayers[c]);
                         if (path == null)
                         {
-                            //???
 #if DEBUG
                             System.Diagnostics.Debug.WriteLine("gdi_printer: no path?");
 #endif
                             continue;
-                        }
+                        } // End if (path == null) 
 
-                        //------
                         //then move pen point to the position we want to draw a glyph
                         float cx = (float)System.Math.Round(snapToPxScale.ExactX + x);
                         float cy = (float)System.Math.Floor(snapToPxScale.ExactY + baseline);
@@ -203,13 +200,15 @@ namespace SvgRenderer
                         {
                             g.FillPath(_fillBrush, path);
                         }
+
                         if (DrawOutline)
                         {
                             g.DrawPath(_outlinePen, path);
                         }
-                        //and then we reset back ***
+
+                        // and then we reset back
                         g.TranslateTransform(-cx, -cy);
-                    }
+                    } // Next c 
                 }
                 else
                 {
@@ -217,7 +216,6 @@ namespace SvgRenderer
 
                     if (path == null)
                     {
-                        //???
 #if DEBUG
                         System.Diagnostics.Debug.WriteLine("gdi_printer: no path?");
 #endif
@@ -235,34 +233,39 @@ namespace SvgRenderer
                     {
                         g.FillPath(_fillBrush, path);
                     }
+
                     if (DrawOutline)
                     {
                         g.DrawPath(_outlinePen, path);
                     }
-                    //and then we reset back ***
+
+                    // and then we reset back
                     g.TranslateTransform(-cx, -cy);
                 } // End else
+
             } // Whend 
 
-            g.CloseGroup();
-
-        } // End Sub 
+        } // End Sub DrawFromGlyphPlans 
 
 
         public override void DrawString(char[] textBuffer, int startAt, int len, float x, float y)
         {
+            this.TargetGraphics.SetTextAndFont(new string(textBuffer), this.Typeface.Name, this.FontSizeInPoints);
+            this.TargetGraphics.OpenGroup();
+
             _reusableUnscaledGlyphPlanList.Clear();
             //1. unscale layout, in design unit
             _glyphLayout.Layout(textBuffer, startAt, len);
             _glyphLayout.GenerateUnscaledGlyphPlans(_reusableUnscaledGlyphPlanList);
 
             //draw from the glyph plan seq
+            DrawFromGlyphPlans(new GlyphPlanSequence(_reusableUnscaledGlyphPlanList), x, y);
 
-            DrawFromGlyphPlans(
-                new GlyphPlanSequence(_reusableUnscaledGlyphPlanList),
-                x, y);
-        }
+            this.TargetGraphics.CloseGroup();
+        } // End Sub DrawString 
 
 
-    }
-}
+    } // End Class SvgTextPrinter 
+
+
+} // End Namespace SvgRenderer 

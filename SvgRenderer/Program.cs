@@ -30,10 +30,25 @@ namespace SvgRenderer
             textToPrint = "HELiOS";
             textToPrint = "hello";
             textToPrint = "Halloween";
+            textToPrint = "Aloha oe";
+
+            // https://www.google.com/get/noto/#sans-hant
+            textToPrint = "Привет мир";
+            textToPrint = "你好，世界"; // Mandarin
+            textToPrint = "مرحبا بالعالم"; // Arabic
+            textToPrint = "Chào thế giới"; // Viet 
+            textToPrint = "สวัสดีชาวโลก"; // Thai 
+            textToPrint = "ওহে বিশ্ব"; // Bengali 
+            textToPrint = "សួស្តី​ពិភពលោក"; // Khmer
+            textToPrint = "こんにちは世界"; // Japanese 
+            textToPrint = "안녕 세상"; // Korean
+
             */
-            textToPrint = "COR-Basic";
+            
             textToPrint = ".NET Core";
-            // textToPrint = "Internet Exploder";
+            textToPrint = "1. Obergeschoss";
+            textToPrint = "1st Floor";
+
 
             if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
             {
