@@ -163,6 +163,8 @@ namespace SvgRenderer.Helpers
                 System.Console.WriteLine(itf.FontSubFamily);
                 System.Console.Write("TypefaceStyle: ");
                 System.Console.WriteLine(itf.TypefaceStyle);
+                
+                
 
                 if (itf.Languages != null && itf.Languages.SupportedLangs != null)
                 {

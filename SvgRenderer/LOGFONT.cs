@@ -77,5 +77,7 @@ namespace AspNetCore.ReportingServices.Rendering.ExcelRenderer.Excel
 				"lfPitchAndFamily=" + lfPitchAndFamily + ", " +
 				"lfFaceName=" + lfFaceName.ToString();
 		}
+		
+		
 	}
 }

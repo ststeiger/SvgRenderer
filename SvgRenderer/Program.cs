@@ -51,10 +51,49 @@ namespace SvgRenderer
 
         }
 
+        // https://stackoverflow.com/questions/24809978/calculating-the-bounding-box-of-cubic-bezier-curve        
+        // https://en.wikipedia.org/wiki/Zero_to_the_power_of_zero
+        public static void ComputeBezierBounds(float A, float B, float C, float D)
+        {
+            float a = 3.0f * D - 9.0f * C + 9.0f * B - 3.0f * A;
+            float b = 6.0f * A - 12.0f * B + 6.0f * C;
+            float c = 3.0f * B - A;
+            
+            // solve for a t^2 + b t + c 
+            
+            float sqrtexp = b*b-4*a*c;
+            //float two_a = 2 * a;
+            
+            if (sqrtexp < 0)
+            {
+                // No real solution (=collinear?) 
+                // return points A and D
+            }
+
+            
+            // at a=0 ==> t = -c/b;
+            if(a==0.0f)//if (two_a == 0.0f)
+            {
+                if (b == 0.0f)
+                {
+                       
+                }
+                else
+                {
+                    // One solution
+                    //  t = -c/b;
+                }
+                
+            }
+            
+        }
 
 
         static void Main(string[] args)
         {
+            BezierBoundsComputation.Test();
+            FontConfig.FontQuery.Test((new string[]{"Verdana"}));
+            
             // TestGdiFont();
 
             string outputDirectory = System.IO.Path.GetDirectoryName( typeof(Program).Assembly.Location);
