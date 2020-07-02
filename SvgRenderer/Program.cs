@@ -12,6 +12,7 @@ namespace SvgRenderer
     class Program
     {
 
+
         public static void TestGdiFont()
         {
             // System.Drawing.Text.PrivateFontCollection myFonts = new System.Drawing.Text.PrivateFontCollection();
@@ -41,15 +42,60 @@ namespace SvgRenderer
             System.Console.WriteLine(lOGFONT.lfFaceName);
 
 
-            
-
             // font.IsSystemFont
             System.Console.WriteLine(font.Name);
             System.Console.WriteLine(font.OriginalFontName);
             System.Console.WriteLine(font.SystemFontName); 
             System.Console.WriteLine(font.FontFamily.Name);
+        } // End Sub TestGdiFont 
 
-        }
+
+        // https://superuser.com/questions/760627/how-to-list-installed-font-families
+        public static void ListWindowsFonts()
+        {
+            // reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" /s
+
+            System.Drawing.Text.InstalledFontCollection installedFonts = new System.Drawing.Text.InstalledFontCollection();
+            foreach (System.Drawing.FontFamily thisFontFamily in installedFonts.Families)
+            {
+                System.Console.Write(thisFontFamily.Name);
+                // https://www.codeproject.com/Articles/4190/XFont-Get-font-name-and-file-information
+                // https://stackoverflow.com/questions/7408024/how-to-get-a-font-file-name/7408230
+
+                System.Drawing.Font font = new System.Drawing.Font(
+                   thisFontFamily, 
+                   16,
+                   System.Drawing.FontStyle.Regular,
+                   System.Drawing.GraphicsUnit.Pixel
+                );
+
+                System.Console.WriteLine(font.Name);
+                System.Console.WriteLine(font.OriginalFontName);
+                System.Console.WriteLine(font.SystemFontName);
+            } // Next thisFontFamily 
+
+        } // End Sub ListWindowsFonts 
+
+
+        public static void ListWindowsFonts2()
+        {
+            // Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
+
+            foreach (string value in key.GetValueNames())
+            {
+                System.Console.Write("Font: ");
+                System.Console.WriteLine(value);
+
+                // Check for the publisher to ensure it's our product
+                string fileName = System.Convert.ToString(key.GetValue(value));
+                
+                System.Console.Write("Filename: ");
+                System.Console.WriteLine(fileName);
+            } // Next value 
+
+        } // End Sub ListWindowsFonts2 
+
 
         // https://stackoverflow.com/questions/24809978/calculating-the-bounding-box-of-cubic-bezier-curve        
         // https://en.wikipedia.org/wiki/Zero_to_the_power_of_zero
@@ -84,13 +130,14 @@ namespace SvgRenderer
                     //  t = -c/b;
                 }
                 
-            }
-            
-        }
+            } // End if a == 0 
+
+        } // End Sub ComputeBezierBounds 
 
 
         static void Main(string[] args)
         {
+            ListWindowsFonts();
             BezierBoundsComputation.Test();
             FontConfig.FontQuery.Test((new string[]{"Verdana"}));
             
@@ -139,8 +186,8 @@ namespace SvgRenderer
                 System.Console.WriteLine("The GDI-renderer needs libgdiplus.so/libgdiplus.dylib from the mono-project.");
                 System.Console.WriteLine("sudo apt-get install -y libgdiplus");
                 System.Console.WriteLine(System.Environment.NewLine);
-            }
-            
+            } // End if (System.Environment.OSVersion.Platform == System.PlatformID.Unix) 
+
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             PdfTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
