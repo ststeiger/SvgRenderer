@@ -1,4 +1,6 @@
 ﻿
+using Typography.OpenFont;
+
 namespace SvgRenderer.Helpers
 {
 
@@ -61,6 +63,19 @@ namespace SvgRenderer.Helpers
                 System.Console.Write("FontPath: ");
                 System.Console.WriteLine(itf.FontPath);
                 System.Console.Write("FontName: ");
+
+                try
+                {
+                    // My additions - TODO: Test
+                    Typeface tf = store.GetTypeface(itf);
+                    System.Console.Write("IsTrueTypeFont: ");
+                    System.Console.WriteLine(tf.IsTrueTypeFont);
+                    System.Console.Write("TrueTypeEmbeddingType: ");
+                    System.Console.WriteLine(tf.TrueTypeEmbeddingType);
+                }
+                catch (System.Exception)
+                { }
+                
                 System.Console.WriteLine(itf.FontName);
                 System.Console.Write("PostScriptName: ");
                 System.Console.WriteLine(itf.PostScriptName);

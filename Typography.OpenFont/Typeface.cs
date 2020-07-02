@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Typography.OpenFont.Tables;
 
 namespace Typography.OpenFont
@@ -92,7 +93,45 @@ namespace Typography.OpenFont
         internal Gasp GaspTable { get; set; }
         internal HorizontalHeader HheaTable { get; set; }
         internal OS2Table OS2Table { get; set; }
-        //
+
+
+        public bool IsTrueTypeFont
+        {
+            get
+            {
+                return this.OS2Table != null;
+            }
+        }
+
+
+        public TrueTypeEmbeddability TrueTypeEmbeddingType
+        {
+            get
+            {
+                int otmfsType = (this.OS2Table.fsType & 0xf);
+
+                if (!this.IsTrueTypeFont)
+                {
+                    // We could throw, or we could just define a new enum-member. 
+                    // throw new System.InvalidOperationException("Not a TrueType-font.");
+                    return TrueTypeEmbeddability.EMBED_NOTTRUETYPE;
+                }
+
+                if (otmfsType == (int)LicenseFlags.LICENSE_INSTALLABLE)
+                    return TrueTypeEmbeddability.EMBED_INSTALLABLE;
+                else if ((otmfsType & (int)LicenseFlags.LICENSE_EDITABLE) != 0)
+                    return TrueTypeEmbeddability.EMBED_EDITABLE;
+                else if ((otmfsType & (int)LicenseFlags.LICENSE_PREVIEWPRINT) != 0)
+                    return TrueTypeEmbeddability.EMBED_PREVIEWPRINT;
+                else if ((otmfsType & (int)LicenseFlags.LICENSE_NOEMBEDDING) != 0)
+                    return TrueTypeEmbeddability.EMBED_NOEMBEDDING;
+
+                // WARN("unrecognized flags, %#x\n", otmfsType);
+                return TrueTypeEmbeddability.EMBED_INSTALLABLE;
+            } // End Function TTGetEmbeddingType 
+        }
+
+
         public bool HasPrepProgramBuffer => PrepProgramBuffer != null;
 
         /// <summary>
