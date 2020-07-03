@@ -9,6 +9,17 @@ namespace libFontConfigSharp
 
 		public const string LIB = @"C:\Users\Stefan.Steiger\AppData\Local\Gtk\3.24\libfontconfig-1.dll";
 
+		// ldd /usr/lib/x86_64-linux-gnu/libfontconfig.so
+		// 	linux-vdso.so.1 (0x00007ffc383fb000)
+		// 	libfreetype.so.6 => /usr/lib/x86_64-linux-gnu/libfreetype.so.6 (0x00007f92bb87b000)
+		// 	libexpat.so.1 => /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007f92bb649000)
+		// 	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f92bb42a000)
+		// 	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f92bb039000)
+		// 	libpng16.so.16 => /usr/lib/x86_64-linux-gnu/libpng16.so.16 (0x00007f92bae07000)
+		// 	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f92babea000)
+		// 	/lib64/ld-linux-x86-64.so.2 (0x00007f92bbd74000)
+		// 	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f92ba84c000)
+		
 
 		[System.Runtime.InteropServices.DllImport(LIB)]
 		public static extern System.IntPtr FcInitLoadConfigAndFonts();

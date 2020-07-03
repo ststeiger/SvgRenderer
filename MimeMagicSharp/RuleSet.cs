@@ -1,32 +1,37 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MimeMagicSharp
 {
+    
+    
     //  Rule set representation
     class RuleSet
     {
-        [JsonProperty("Rule")]  public List<Rule> Rules;
-
-        //  Constructor section
-        public RuleSet()
-        {
-            Rules = new List<Rule>();
-        }
+        
+        [Newtonsoft.Json.JsonProperty("Rule")]  
+        public System.Collections.Generic.List<Rule> Rules;
+        
+        
         public RuleSet(Rule rule)
         {
-            Rules = new List<Rule>() { rule };
-        }
-
+            Rules = new System.Collections.Generic.List<Rule>();
+            if(rule != null)
+                this.Rules.Add(rule);
+        } // End Constructor 
+        
+        
+        public RuleSet()
+            :this(null)
+        { } // End Constructor 
+        
+        
         //  Check file header with given rule set
         public bool CheckType(byte[] inputArray)
         {
             int levelPointer = 0;
-            List<Rule> levelRules;
+            System.Collections.Generic.List<Rule> levelRules;
 
             //  Rule set can contain several rules with sertain hierarchy
             //  Level 0. indent 0

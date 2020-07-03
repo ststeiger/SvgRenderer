@@ -1,17 +1,19 @@
-﻿using Newtonsoft.Json;
+﻿
 using System.Linq;
-using System.Text;
+
 
 namespace MimeMagicSharp
 {
+    
+    
     //  Rule representation
     public class Rule
     {
-        [JsonProperty("Range")] int _range;
-        [JsonProperty("Offset")] int _offset;
-        [JsonProperty("Data")] string _data;
-        [JsonProperty("DataUTF8")] string _dataUtf8;
-        [JsonProperty("Level")] public int Level;
+        [Newtonsoft.Json.JsonProperty("Range")] int _range;
+        [Newtonsoft.Json.JsonProperty("Offset")] int _offset;
+        [Newtonsoft.Json.JsonProperty("Data")] string _data;
+        [Newtonsoft.Json.JsonProperty("DataUTF8")] string _dataUtf8;
+        [Newtonsoft.Json.JsonProperty("Level")] public int Level;
 
         //  Constructor section
         public Rule()
@@ -31,7 +33,7 @@ namespace MimeMagicSharp
             _offset = startOffset;
 
             _data = ByteArrayToString(value);
-            _dataUtf8 = Encoding.UTF8.GetString(value);
+            _dataUtf8 = System.Text.Encoding.UTF8.GetString(value);
         }
 
         //  Check file header with given rule
@@ -54,7 +56,7 @@ namespace MimeMagicSharp
         //  Additional function to speed up array serach
         private string ByteArrayToString(byte[] array)
         {
-            StringBuilder sb = new StringBuilder();
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
             string hexAlphabet = "0123456789ABCDEF";
 
             foreach (byte b in array)

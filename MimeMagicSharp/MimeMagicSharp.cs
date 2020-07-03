@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-
+﻿
 namespace MimeMagicSharp
 {
     public enum EMagicFileType { Json, Original }
     public enum EMimeTypeBy { Extension, Content }
 
-    public class MimeMagicSharp : IDisposable
+    public class MimeMagicSharp 
+        : System.IDisposable
     {
         private readonly Reader _mimeReader;
         public static string UnknownMimeType = "application/unknown";
-        public static Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
+        public static System.Version Version
+        {
+            get
+            {
+                return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            }
+        }
+        
+        
         public MimeMagicSharp(EMagicFileType magicFileType, string magicFilePath)
         {
             _mimeReader = new Reader(magicFilePath, magicFileType);
         }
-        void IDisposable.Dispose()
+        void System.IDisposable.Dispose()
         {
             _mimeReader?.Dispose();
         }
 
-        public IEnumerable<MimeTypeGuess> AssumeMimeType(EMimeTypeBy detectionMethod, string filename)
+        public System.Collections.Generic.IEnumerable<MimeTypeGuess> AssumeMimeType(EMimeTypeBy detectionMethod, string filename)
         {
             switch (detectionMethod)
             {
@@ -32,20 +37,20 @@ namespace MimeMagicSharp
                 case EMimeTypeBy.Extension:
                     return _mimeReader.GetMimeTypeByExtension(filename);
                 default:
-                    throw new ArgumentException($"Ivalid property: {detectionMethod}");
+                    throw new System.ArgumentException($"Ivalid property: {detectionMethod}");
             }
         }
 
         public static void ConvertFromOriginalToJson(string filenameFrom, string filenameTo)
         {
-            if (File.Exists(filenameFrom))
+            if (System.IO.File.Exists(filenameFrom))
             {
                 Reader mimeReader = new Reader(filenameFrom, EMagicFileType.Original);
                 mimeReader.SaveLocal(filenameTo);
             }
             else
             {
-                throw new FileNotFoundException($"File does not exist: {filenameFrom}");
+                throw new System.IO.FileNotFoundException($"File does not exist: {filenameFrom}");
             }
         }
     }

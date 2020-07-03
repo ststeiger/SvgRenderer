@@ -1,11 +1,16 @@
-﻿//MIT, 2016-present, WinterDev 
+﻿
+//MIT, 2016-present, WinterDev 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Typography.OpenFont;
 using Typography.OpenFont.Tables;
+
+
 namespace Typography.OpenFont
 {
+    
+    
     public static class TypefaceExtension3
     {
 
@@ -253,13 +258,14 @@ namespace Typography.FontManagement
         /// </summary>
         Replace
     }
-
-
+    
+    
     public interface IInstalledTypefaceProvider
     {
         InstalledTypeface GetInstalledTypeface(string fontName, TypefaceStyle style);
     }
-
+    
+    
     public class InstalledTypefaceCollection : IInstalledTypefaceProvider
     {
         class InstalledTypefaceGroup
@@ -317,15 +323,20 @@ namespace Typography.FontManagement
             _bold_italic = CreateCreateNewGroup(TypefaceStyle.Bold | TypefaceStyle.Italic, "bold italic");
             //
         }
+        
+        
         public void SetFontNameDuplicatedHandler(FontNameDuplicatedHandler handler)
         {
             _fontNameDuplicatedHandler = handler;
         }
+        
+        
         public void SetFontNotFoundHandler(FontNotFoundHandler fontNotFoundHandler)
         {
             _fontNotFoundHandler = fontNotFoundHandler;
         }
-
+        
+        
         static InstalledTypefaceCollection s_intalledTypefaces;
         public static InstalledTypefaceCollection GetSharedTypefaceCollection(FirstInitFontCollectionDelegate initdel)
         {
@@ -335,20 +346,27 @@ namespace Typography.FontManagement
                 s_intalledTypefaces = new InstalledTypefaceCollection();
                 initdel(s_intalledTypefaces);
             }
+            
             return s_intalledTypefaces;
         }
+        
+        
         public static void SetAsSharedTypefaceCollection(InstalledTypefaceCollection installedTypefaceCollection)
         {
             s_intalledTypefaces = installedTypefaceCollection;
         }
+        
+        
         public static InstalledTypefaceCollection GetSharedTypefaceCollection()
         {
             return s_intalledTypefaces;
         }
+        
+        
         InstalledTypefaceGroup CreateCreateNewGroup(TypefaceStyle installedFontStyle, params string[] names)
         {
             //create font group
-            var fontGroup = new InstalledTypefaceGroup();
+            InstalledTypefaceGroup fontGroup = new InstalledTypefaceGroup();
             //single dic may be called by many names            
             foreach (string name in names)
             {
@@ -360,7 +378,8 @@ namespace Typography.FontManagement
             _allGroups.Add(fontGroup);
             return fontGroup;
         }
-
+        
+        
         public InstalledTypeface AddFontPreview(PreviewFontInfo previewFont, string srcPath)
         {
             _onlyFontNames[previewFont.Name] = true;
@@ -413,10 +432,11 @@ namespace Typography.FontManagement
                 typefaceStyle,
                 srcPath)
             { ActualStreamOffset = previewFont.ActualStreamOffset };
-
-
+            
             return Register(installedTypeface) ? installedTypeface : null;
         }
+        
+        
         public bool AddFontStreamSource(IFontStreamSource src)
         {
             //preview data of font
@@ -460,12 +480,10 @@ namespace Typography.FontManagement
                 return false;
             }
         }
-
+        
+        
         bool Register(InstalledTypeface newTypeface)
         {
-
-
-
             InstalledTypefaceGroup selectedFontGroup = null;
 
             string fontSubFamUpperCaseName = newTypeface.TypographicFontSubFamily;
@@ -585,7 +603,7 @@ namespace Typography.FontManagement
                     _otherFontNames.Add(newTypeface.FontName.ToUpper(), newTypeface);
                 }
             }
-
+            
             //register font
             if (newTypeface.PostScriptName != null)
             {
@@ -601,15 +619,18 @@ namespace Typography.FontManagement
 #endif
                 }
             }
-
+            
             return register_result;
-
         }
+        
+        
         public InstalledTypeface GetFontByPostScriptName(string postScriptName)
         {
             _postScriptNames.TryGetValue(postScriptName.ToUpper(), out InstalledTypeface found);
             return found;
         }
+        
+        
         public InstalledTypeface GetInstalledTypeface(string fontName, string subFamName)
         {
             string upperCaseFontName = fontName.ToUpper();
@@ -633,10 +654,11 @@ namespace Typography.FontManagement
             {
                 return _fontNotFoundHandler(this, fontName, subFamName);
             }
-
+            
             return null; //not found
         }
-
+        
+        
         public InstalledTypeface GetInstalledTypeface(string fontName, TypefaceStyle wellknownSubFam)
         {
             //not auto resolve
@@ -690,7 +712,8 @@ namespace Typography.FontManagement
             }
             return _found;
         }
-
+        
+        
         internal static string GetSubFam(TypefaceStyle typefaceStyle)
         {
             switch (typefaceStyle)
@@ -702,6 +725,8 @@ namespace Typography.FontManagement
             }
             return "";
         }
+        
+        
         internal static TypefaceStyle GetWellknownFontStyle(string subFamName)
         {
             switch (subFamName.ToUpper())
@@ -719,7 +744,8 @@ namespace Typography.FontManagement
                     return (TypefaceStyle.Bold | TypefaceStyle.Italic);
             }
         }
-
+        
+        
         public IEnumerable<InstalledTypeface> GetInstalledFontIter()
         {
             foreach (InstalledTypefaceGroup fontgroup in _allGroups)
@@ -730,8 +756,8 @@ namespace Typography.FontManagement
                 }
             }
         }
-
-
+        
+        
         public IEnumerable<string> GetFontNameIter() => _onlyFontNames.Keys;
         public IEnumerable<InstalledTypeface> GetInstalledTypefaceIter(string fontName)
         {
@@ -744,7 +770,8 @@ namespace Typography.FontManagement
                 }
             }
         }
-
+        
+        
         public void UpdateUnicodeRanges()
         {
             _registeredWithUniCodeLangBits.Clear();
@@ -757,6 +784,8 @@ namespace Typography.FontManagement
                 }
             }
         }
+        
+        
         public bool TryGetAlternativeTypefaceFromChar(char c, out ScriptLangInfo foundScriptLang, out List<InstalledTypeface> found)
         {
             //find a typeface that supported input char c
@@ -775,15 +804,15 @@ namespace Typography.FontManagement
                     }
                 }
             }
+            
             found = null;
             return false;
         }
-
-
+        
+        
         readonly Dictionary<UnicodeLangBits, List<InstalledTypeface>> _registeredWithUniCodeLangBits = new Dictionary<UnicodeLangBits, List<InstalledTypeface>>();
         void RegisterUnicodeSupport(UnicodeLangBits langBit, InstalledTypeface instFont)
         {
-
             if (!_registeredWithUniCodeLangBits.TryGetValue(langBit, out List<InstalledTypeface> found))
             {
                 found = new List<InstalledTypeface>();
@@ -791,7 +820,8 @@ namespace Typography.FontManagement
             }
             found.Add(instFont);
         }
-
+        
+        
     }
 
 
@@ -809,14 +839,12 @@ namespace Typography.FontManagement
             if (!Directory.Exists(folder))
             {
 #if DEBUG
-
                 System.Diagnostics.Debug.WriteLine("LoadFontsFromFolder, not found folder:" + folder);
-
 #endif
                 return;
             }
             //-------------------------------------
-
+            
             // 1. font dir
             foreach (string file in Directory.GetFiles(folder))
             {
@@ -835,7 +863,7 @@ namespace Typography.FontManagement
                         break;
                 }
             }
-
+            
             //2. browse recursively; on Linux, fonts are organised in subdirectories
             if (recursive)
             {
@@ -845,14 +873,16 @@ namespace Typography.FontManagement
                 }
             }
         }
+        
+        
         public static void LoadSystemFonts(this InstalledTypefaceCollection fontCollection, bool recursive = false)
         {
-
             if (CustomSystemFontListLoader != null)
             {
                 CustomSystemFontListLoader(fontCollection);
                 return;
             }
+            
             // Windows system fonts
             LoadFontsFromFolder(fontCollection, "c:\\Windows\\Fonts");
             // These are reasonable places to look for fonts on Linux
