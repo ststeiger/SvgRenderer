@@ -159,6 +159,7 @@ namespace SvgRenderer
 
         static void Main(string[] args)
         {
+            Trash.MimeMagicTest.Test();
             ListWindowsFonts();
             BezierBoundsComputation.Test();
             FontConfig.FontQuery.Test((new string[] { "Verdana" }));

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Typography.TextBreak\Typography.TextBreak.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestMime\" />
+  </ItemGroup>
+
 </Project>

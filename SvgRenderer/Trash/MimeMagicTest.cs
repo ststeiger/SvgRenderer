@@ -1,12 +1,12 @@
 ﻿
 namespace SvgRenderer.Trash
 {
-    
-    
+
+
     public class MimeMagicTest
     {
-        
-        
+
+
         public static void Test()
         {
             string originalMagicFile = "/usr/share/mime/magic";
@@ -18,6 +18,16 @@ namespace SvgRenderer.Trash
             string fileName =
                 System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Newtonsoft.Json.dll");
             // ConvertMagicFile(originalMagicFile, jsonMagicFile);
+
+            
+
+            // file aapt.exe
+            // PE32 executable for MS Windows (console) Intel 80386 32 - bit
+
+            // ILSpy.exe
+            // PE32 executable for MS Windows (GUI) Intel 80386 Mono/.Net assembly
+            // locate32.exe; PE32 + executable for MS Windows (GUI) Mono /.Net assembly
+
             GetFileMime(jsonMagicFile, fileName);
             System.Environment.Exit(0);
         } // End Sub Test 
@@ -52,13 +62,13 @@ namespace SvgRenderer.Trash
                 {
                     System.Console.WriteLine(ex.Message);
                 }
-                
+
             } // End using ms 
-            
+
         } // End Sub GetFileMime 
-        
-        
+
+
     } // End Class MimeMagicTest 
-    
-    
+
+
 } // End Namespace SvgRenderer.Trash 
