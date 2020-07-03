@@ -12,6 +12,7 @@ namespace SvgRenderer
     class Program
     {
 
+
         public static void TestGdiFont()
         {
             // System.Drawing.Text.PrivateFontCollection myFonts = new System.Drawing.Text.PrivateFontCollection();
@@ -41,15 +42,82 @@ namespace SvgRenderer
             System.Console.WriteLine(lOGFONT.lfFaceName);
 
 
-            
-
             // font.IsSystemFont
             System.Console.WriteLine(font.Name);
             System.Console.WriteLine(font.OriginalFontName);
-            System.Console.WriteLine(font.SystemFontName); 
+            System.Console.WriteLine(font.SystemFontName);
             System.Console.WriteLine(font.FontFamily.Name);
+        } // End Sub TestGdiFont 
 
+
+        // https://superuser.com/questions/760627/how-to-list-installed-font-families
+        public static void ListWindowsFonts()
+        {
+            // reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" /s
+
+            System.Drawing.Text.InstalledFontCollection installedFonts = new System.Drawing.Text.InstalledFontCollection();
+            foreach (System.Drawing.FontFamily thisFontFamily in installedFonts.Families)
+            {
+                System.Console.Write(thisFontFamily.Name);
+                // https://www.codeproject.com/Articles/4190/XFont-Get-font-name-and-file-information
+                // https://stackoverflow.com/questions/7408024/how-to-get-a-font-file-name/7408230
+
+                System.Drawing.Font font = new System.Drawing.Font(
+                   thisFontFamily,
+                   16,
+                   System.Drawing.FontStyle.Regular,
+                   System.Drawing.GraphicsUnit.Pixel
+                );
+
+                System.Console.WriteLine(font.Name);
+                System.Console.WriteLine(font.OriginalFontName);
+                System.Console.WriteLine(font.SystemFontName);
+            } // Next thisFontFamily 
+
+        } // End Sub ListWindowsFonts 
+
+
+        public static void ListWindowsFonts2()
+        {
+            // Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
+
+            foreach (string value in key.GetValueNames())
+            {
+                System.Console.Write("Font: ");
+                System.Console.WriteLine(value);
+
+                // Check for the publisher to ensure it's our product
+                string fileName = System.Convert.ToString(key.GetValue(value));
+
+                System.Console.Write("Filename: ");
+                System.Console.WriteLine(fileName);
+            } // Next value 
+
+        } // End Sub ListWindowsFonts2 
+
+
+        public static void ListFontsOnOSX()
+        {
+            // https:// github.com/xamarin/xamarin-macios
+            // https:// github.com/xamarin/xamarin-macios/tree/main/src/AppKit
+            // https:// github.com/mono/xwt/blob/master/Xwt.XamMac/Xwt.Mac/Util.cs
+            // https:// github.com/mono/cocoa-sharp
+
+
+            // NSFontManager.SharedFontManager
+
+            // manager = Cocoa.NSFontManager.sharedFontManager()
+            // font_families = list(manager.availableFontFamilies())
+
+            // //  This returns an array of NSStrings that gives you each font installed on the system
+            // NSArray* fonts = [[NSFontManager sharedFontManager] availableFontFamilies];
+
+            // //  Does the same as the above, but includes each available font style (e.g. you get
+            // //  Verdana, "Verdana-Bold", "Verdana-BoldItalic", and "Verdana-Italic" for Verdana).
+            // NSArray* fonts = [[NSFontManager sharedFontManager] availableFonts];
         }
+
 
         // https://stackoverflow.com/questions/24809978/calculating-the-bounding-box-of-cubic-bezier-curve        
         // https://en.wikipedia.org/wiki/Zero_to_the_power_of_zero
@@ -58,46 +126,46 @@ namespace SvgRenderer
             float a = 3.0f * D - 9.0f * C + 9.0f * B - 3.0f * A;
             float b = 6.0f * A - 12.0f * B + 6.0f * C;
             float c = 3.0f * B - A;
-            
+
             // solve for a t^2 + b t + c 
-            
-            float sqrtexp = b*b-4*a*c;
+
+            float sqrtexp = b * b - 4 * a * c;
             //float two_a = 2 * a;
-            
+
             if (sqrtexp < 0)
             {
                 // No real solution (=collinear?) 
                 // return points A and D
             }
 
-            
+
             // at a=0 ==> t = -c/b;
-            if(a==0.0f)//if (two_a == 0.0f)
+            if (a == 0.0f)//if (two_a == 0.0f)
             {
                 if (b == 0.0f)
                 {
-                       
+
                 }
                 else
                 {
                     // One solution
                     //  t = -c/b;
                 }
-                
-            }
-            
-        }
+
+            } // End if a == 0 
+
+        } // End Sub ComputeBezierBounds 
 
 
         static void Main(string[] args)
         {
-            SvgRenderer.Trash .MimeMagicTest.Test();
+            ListWindowsFonts();
             BezierBoundsComputation.Test();
-            FontConfig.FontQuery.Test((new string[]{"Verdana"}));
-            
+            FontConfig.FontQuery.Test((new string[] { "Verdana" }));
+
             // TestGdiFont();
 
-            string outputDirectory = System.IO.Path.GetDirectoryName( typeof(Program).Assembly.Location);
+            string outputDirectory = System.IO.Path.GetDirectoryName(typeof(Program).Assembly.Location);
             outputDirectory = System.IO.Path.Combine(outputDirectory, "..", "..", "..");
             outputDirectory = System.IO.Path.GetFullPath(outputDirectory);
             string fontDirectory = System.IO.Path.Combine(outputDirectory, "TestFonts");
@@ -140,8 +208,8 @@ namespace SvgRenderer
                 System.Console.WriteLine("The GDI-renderer needs libgdiplus.so/libgdiplus.dylib from the mono-project.");
                 System.Console.WriteLine("sudo apt-get install -y libgdiplus");
                 System.Console.WriteLine(System.Environment.NewLine);
-            }
-            
+            } // End if (System.Environment.OSVersion.Platform == System.PlatformID.Unix) 
+
             GdiTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             SvgRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
             PdfTextRenderingTest.Test(textToPrint, fontDirectory, outputDirectory);
