@@ -7,37 +7,6 @@ namespace SvgRenderer.Native
     {
         /*
 
-English Metric Unit (EMU): 
-A measurement in computer typography. 
-There are 
-     635 EMUs per twip 
-,  6'350 EMUs per half-point 
-, 12'700 EMUs per point 
-, 36'000 EMUs per mm
-,152'400 EMUs per pica
-,914'400 EMUs per inch. 
-
-
-
-These units are used to translate on-screen layouts to printed layouts for specified printer hardware.
-
-https://www.trichview.com/help/units_of_measurement.html#:~:text=1%20inch%20%3D%20914400%20EMU%2C%201%20mm%20%3D%2036000%20EMU.
-Twip (tw, “twentieth of a point”) is defined as 1/20 of point. It equals to 1/1440 of inch.
-Pica (pc) – typographic unit of measure corresponding to 1/6 of inch. The pica contains 12 points.
-Point (pt) – typographic unit of measure corresponding to 1/72 of inch. This is a measuring unit for font size.
-
-
-Pixel (px) – a single point in a raster image or device. 
-To convert inch (or other absolute unit of measurement) to pixels, 
-a pixel density (referred as "pixels per inch" (PPI) or "dots per inch" (DPI)) 
-of this device must be known. 
-For some devices (like printers), this value is precise. 
-For other devices (like computer displays), 
-this value is logical and can be changed by the user. 
-For screens, a typical "pixels per inch" value is 96 
-(accessible as Screen.PixelsPerInch).
-
-
 https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
 https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
 
@@ -75,10 +44,6 @@ updatePixelRatio();
 matchMedia(mqString).addListener(updatePixelRatio);
 
 
-Screen.PrimaryScreen.Bounds.Size (or Screen.GetBounds(myform)).
-
-https://stackoverflow.com/questions/2621439/how-to-get-screen-dpi-linux-mac-programatically
-https://www.davidthielen.info/programming/2007/05/get_screen_dpi_.html
 https://superuser.com/questions/1019825/why-are-pixels-square
 https://en.wikipedia.org/wiki/Pixel_aspect_ratio
 
@@ -125,6 +90,9 @@ double magnificationY = dpiMagnification.M22;
 
             if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows))
             {
+                // System.Windows.Froms.Screen.PrimaryScreen.Bounds.Size
+                // or Screen.GetBounds(myform))
+
                 DPI = WindowsDPI.DPI;
                 HorizontalDPI = DPI;
                 VerticalDPI = DPI;
@@ -137,7 +105,7 @@ double magnificationY = dpiMagnification.M22;
 
 
 
-
+    // https://stackoverflow.com/questions/2621439/how-to-get-screen-dpi-linux-mac-programatically
     class LinuxDPI
     {
 
@@ -247,6 +215,7 @@ double magnificationY = dpiMagnification.M22;
     }
 
 
+    // https://www.davidthielen.info/programming/2007/05/get_screen_dpi_.html
     public class WindowsDPI
     {
         [System.Runtime.InteropServices.DllImport("gdi32.dll", EntryPoint = "CreateDC", CharSet = System.Runtime.InteropServices.CharSet.Auto, SetLastError = true)]
