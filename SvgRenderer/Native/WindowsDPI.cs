@@ -44,6 +44,8 @@ updatePixelRatio();
 matchMedia(mqString).addListener(updatePixelRatio);
 
 
+// https://gist.github.com/bsorrentino/cf3f8a439ef688d2f869e1c00aaeecf9
+
 https://superuser.com/questions/1019825/why-are-pixels-square
 https://en.wikipedia.org/wiki/Pixel_aspect_ratio
 
